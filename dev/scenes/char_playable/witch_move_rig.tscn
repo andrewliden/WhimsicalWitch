@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/char_playable/witch_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://witch_move_rig.gd" type="Script" id=2]
+
+[node name="witch_move_rig" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="witch_base" parent="." instance=ExtResource( 1 )]

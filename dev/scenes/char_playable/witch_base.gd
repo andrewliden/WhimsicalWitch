@@ -1,13 +1,22 @@
 extends KinematicBody
 
 ###Constants###
-const MOVE_BOX = Vector3(20, 11.25, 0)
 const MOUSE_SENSITIVITY = 0.25
 const MAX_SPEED = 50
+const NUDGE_AMOUNT = 0.2
+const POINT_FWD_SPEED = 10
+const ROTATE_THRESHOLD = 0.1
+const SPIN_SPEED = 20
+const TILT_SPEED = 10
 
 ###Variables###
 var motionVector = Vector3()
-var nudgeVector = Vector3()
+var forwardVector = Vector3()
+var aboveVector = Vector3()
+var leftVector = Vector3()
+var rotatedRight = false
+var rotatedLeft = false
+var spinning = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,8 +25,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	var collisions = move(delta)
-
+	get_parent_basis()
+	clamp_motion_speed(delta)
+	apply_nudge(delta)
+	handle_tilt(delta)
+	point_forwards(delta)
+	collision_check()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -27,15 +40,14 @@ func mouse_movement(event):
 	#Get a motion vector from the mouse
 	motionVector = Vector3(event.relative.x, event.relative.y, 0) * - MOUSE_SENSITIVITY
 
-
-#Moves the player.  Returns any collisions
-func move(delta):
-	clamp_motion_speed(delta)
-	clamp_to_box()
-	#Test for collisions, translate the player model, and return the set of collisions
-	var collisions = move_and_collide(motionVector, false, true, true)
-	translate(motionVector);
-	return collisions
+#Gets the parent node and uses it as a reference for the meaning of "forward", "above" and "right"
+#This matters, because we're planning on rotating our prop, but we don't want the plane of
+#movement to rotate along with it.
+func get_parent_basis():
+	var parent = get_parent()
+	forwardVector = parent.transform.basis.z
+	aboveVector = parent.transform.basis.y
+	leftVector = parent.transform.basis.x
 
 #Clamps the motion speed to a maximum value.  Also takes care of applying delta to the motion speed.
 func clamp_motion_speed(delta):
@@ -43,19 +55,65 @@ func clamp_motion_speed(delta):
 	if motionVector.length() > MAX_SPEED * delta:
 		motionVector = motionVector.normalized() * MAX_SPEED * delta
 
-#Keeps the player avatar within a box by clamping the motion vector (again)
-func clamp_to_box():
-	#Clamp along X
-	if translation.x + motionVector.x > MOVE_BOX.x:
-		var excess = translation.x + motionVector.x - MOVE_BOX.x
-		motionVector.x -= excess
-	if translation.x + motionVector.x < -MOVE_BOX.x:
-		var excess = translation.x + motionVector.x + MOVE_BOX.x
-		motionVector.x -= excess
-	#Clamp along Y
-	if translation.y + motionVector.y > MOVE_BOX.y:
-		var excess = translation.y + motionVector.y - MOVE_BOX.y
-		motionVector.y -= excess
-	if translation.y + motionVector.y < -MOVE_BOX.y:
-		var excess = translation.y + motionVector.y + MOVE_BOX.y
-		motionVector.y -= excess
+func apply_nudge(delta):
+	#When the player moves the mouse, rotate the model in an axis orthogonal to the direction of movement,
+	#And within the 2D plane of the player's movement (that is, we're ignoring Z)
+	var nudgeVector = Vector3(motionVector.y * -1, motionVector.x, 0) * NUDGE_AMOUNT
+	rotate_x(nudgeVector.x)
+	rotate_y(nudgeVector.y)
+
+func handle_tilt(delta):
+	if rotatedLeft and Input.is_action_just_pressed("gameplay_left"):
+		start_spin()
+		
+	if rotatedRight and Input.is_action_just_pressed("gameplay_right"):
+		start_spin()
+	
+	if spinning:
+		if rotatedRight:
+			rotate_z(SPIN_SPEED * delta)
+		else:
+			rotate_z(-SPIN_SPEED * delta)
+	elif Input.is_action_pressed("gameplay_left") and !rotatedRight:
+		rotatedLeft = true
+		var zDot = aboveVector.dot(transform.basis.y * -1)
+		rotate_z(zDot * delta * TILT_SPEED)
+	elif Input.is_action_pressed("gameplay_right") and !rotatedLeft:
+		rotatedRight = true
+		var zDot = aboveVector.dot(transform.basis.y * 1)
+		rotate_z(zDot * delta * TILT_SPEED)
+	else:
+		#If you're not doing a spin or tilt, rotate z so that y is orthogonal to the left vector again
+		var zDot = leftVector.dot(transform.basis.y)
+		rotate_z(zDot * delta * TILT_SPEED)
+		#If the dot product is greater than the negative threshold, we're not rotated right anymore.
+		#If it's less than the positive threshold, we're not rotated left anymore.
+		if(zDot > -ROTATE_THRESHOLD):
+			rotatedRight = false
+		if(zDot < ROTATE_THRESHOLD):
+			rotatedLeft = false
+
+func start_spin():
+	if !spinning:
+		$SpinTimer.start()
+		spinning = true
+
+func point_forwards(delta):
+	#rotate along the y axis until z is orthogonal to the left again.
+	var xDot = leftVector.dot(transform.basis.z)
+	rotate_y(xDot * delta * POINT_FWD_SPEED * -1)
+	#rotate along the x axis until z is orthogonal to the above again.
+	var yDot = aboveVector.dot(transform.basis.z)
+	rotate_x(yDot * delta * POINT_FWD_SPEED)
+
+func get_motion_vector():
+	return motionVector
+	
+func collision_check():
+	var collision = move_and_collide(Vector3(0,0,0), false, true, true)
+	if collision:
+		var collider = collision.get_collider()
+		print("I'm colliding!  I hit a " + collider.get_class())
+
+func _on_SpinTimer_timeout():
+	spinning = false
