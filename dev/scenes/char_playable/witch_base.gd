@@ -8,6 +8,8 @@ const POINT_FWD_SPEED = 10
 const ROTATE_THRESHOLD = 0.1
 const SPIN_SPEED = 20
 const TILT_SPEED = 10
+const MAX_HEALTH = 100
+const SHAKE_AMOUNT = 15
 
 ###Variables###
 var motionVector = Vector3()
@@ -17,10 +19,13 @@ var leftVector = Vector3()
 var rotatedRight = false
 var rotatedLeft = false
 var spinning = false
+var takingDamage = false
+var health = MAX_HEALTH
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	add_to_group("player")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,6 +66,10 @@ func apply_nudge(delta):
 	var nudgeVector = Vector3(motionVector.y * -1, motionVector.x, 0) * NUDGE_AMOUNT
 	rotate_x(nudgeVector.x)
 	rotate_y(nudgeVector.y)
+	#If the player is taking damage, also randomly nudge the player.
+	if takingDamage:
+		rotate_x(rand_range(-SHAKE_AMOUNT, SHAKE_AMOUNT) * delta)
+		rotate_y(rand_range(-SHAKE_AMOUNT, SHAKE_AMOUNT) * delta)
 
 func handle_tilt(delta):
 	if rotatedLeft and Input.is_action_just_pressed("gameplay_left"):
@@ -113,7 +122,21 @@ func collision_check():
 	var collision = move_and_collide(Vector3(0,0,0), false, true, true)
 	if collision:
 		var collider = collision.get_collider()
-		print("I'm colliding!  I hit a " + collider.get_class())
+		if collider.is_in_group("pickup"):
+			pass
+		elif collider.is_in_group("projectile") and spinning:
+			pass
+		else:
+			damage_player()
+	
+func damage_player(amount = 10):
+	if !takingDamage:
+		takingDamage = true
+		$DamageTimer.start()
+		health -= amount
 
 func _on_SpinTimer_timeout():
 	spinning = false
+
+func _on_DamageTimer_timeout():
+	takingDamage = false

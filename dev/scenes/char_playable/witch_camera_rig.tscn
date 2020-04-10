@@ -10,3 +10,7 @@ script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, -10 )
+
+[node name="BoostTimer" type="Timer" parent="."]
+wait_time = 3.0
+[connection signal="timeout" from="BoostTimer" to="." method="_on_BoostTimer_timeout"]
