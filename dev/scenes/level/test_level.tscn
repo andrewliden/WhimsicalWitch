@@ -1,39 +1,55 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/char_playable/witch_camera_rig.tscn" type="PackedScene" id=1]
 
 [sub_resource type="Curve3D" id=3]
 _data = {
-"points": PoolVector3Array(  ),
-"tilts": PoolRealArray(  )
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.128326, 0, -0.892241, 0.377372, -0.000183105, -28.7722, -0.377372, 0.000183105, 28.7722, -12.5082, 0, 57.9477, 0, 0, 0, 0, 0, 0, 1.11118, -1.52588e-05, 111.727 ),
+"tilts": PoolRealArray( 0, 0, 0 )
 }
 
 [sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="ConvexPolygonShape" id=2]
+[sub_resource type="ConvexPolygonShape" id=4]
+points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=5]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="witch_camera_rig" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.513826, 0, 0.857894, 0, 1, 0, -0.857894, 0, 0.513826, 0, 0, 0 )
-
-[node name="Path" type="Path" parent="witch_camera_rig"]
+[node name="Path" type="Path" parent="."]
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 12.5082, 0, -29.8359 )
 curve = SubResource( 3 )
 
-[node name="PathFollow" type="PathFollow" parent="witch_camera_rig/Path"]
-transform = Transform( 1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, -17.1944, 0, 10.2984 )
-
-[node name="StaticBody" type="RigidBody" parent="."]
+[node name="PathFollow" type="PathFollow" parent="Path"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-gravity_scale = 0.0
+rotation_mode = 4
+
+[node name="witch_camera_rig" parent="Path/PathFollow" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.74554, 0, -0.172764 )
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 100, 4.74554, -5.16572, -0.172764 )
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.74554, 0, -0.172764 )
-shape = SubResource( 2 )
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 100, 4.74554, -5.16572, -0.172764 )
+shape = SubResource( 4 )
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 12.6675, 6.43898, 23.5746 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 12.6675, 6.43898, 23.5746 )
+shape = SubResource( 5 )

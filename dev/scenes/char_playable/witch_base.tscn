@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/models_materials/witch/Broom Texture.material" type="Material" id=1]
 [ext_resource path="res://assets/models_materials/witch/WitchHat.material" type="Material" id=2]
 [ext_resource path="res://assets/models_materials/witch/WitchHair.material" type="Material" id=3]
 [ext_resource path="res://assets/models_materials/witch/WitchTexture.material" type="Material" id=4]
 [ext_resource path="res://scenes/char_playable/witch_base.gd" type="Script" id=5]
+[ext_resource path="res://assets/textures/reticule.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/reticule_small.png" type="Texture" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Broom"
@@ -97,6 +99,28 @@ bind/15/bone = 15
 bind/15/pose = Transform( 1, 1.34566e-15, -1.16787e-22, -1.34063e-14, -0.757541, 6.5745e-08, 4.17999e-08, 3.7708e-22, -1, 0.3, -0.969921, 0.324521 )
 bind/16/bone = 16
 bind/16/pose = Transform( 1, 0, 0, -1.51826e-14, -0.757541, 6.5745e-08, 4.17999e-08, 7.64921e-29, -1, 0.3, -1.57936, 0.324521 )
+
+[sub_resource type="QuadMesh" id=8]
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 7 )
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 2
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 6 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "Flying"
@@ -459,6 +483,21 @@ material/2 = null
 [node name="SpellSource" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63189, 1.79967, 1.94682 )
 
+[node name="CloseDot" type="MeshInstance" parent="SpellSource"]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 1, 0, 0, 5 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="MidDot" type="MeshInstance" parent="SpellSource"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="FarDot" type="MeshInstance" parent="SpellSource"]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 15 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 10 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Flying"
 anims/Flying = SubResource( 4 )
@@ -473,4 +512,5 @@ transform = Transform( 1, 0, 0, 0, 0.613872, 0.789406, 0, -0.789406, 0.613872, 0
 shape = SubResource( 7 )
 
 [node name="SpinTimer" type="Timer" parent="."]
+wait_time = 0.5
 [connection signal="timeout" from="SpinTimer" to="." method="_on_SpinTimer_timeout"]
