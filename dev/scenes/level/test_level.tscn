@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/char_playable/witch_camera_rig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/char_npc/ghost.tscn" type="PackedScene" id=2]
@@ -24,6 +24,13 @@ _data = {
 "points": PoolVector3Array( -3.46802, -6.48499e-05, -7.0038, 3.46802, 6.48499e-05, 7.0038, 0.49432, -2.71203, -1.0047, 7.4276, 0.000167847, -5.5687, -7.4276, -0.000167847, 5.5687, -10.2515, 2.86633, 22.1794, 4.54539, 1.14441e-05, 4.24824, -4.54539, -1.14441e-05, -4.24824, -26.8744, -2.46406, 20.7492, -6.89062, -7.62939e-06, 11.0969, 6.89062, 7.62939e-06, -11.0969, -32.174, -6.52756, 1.24398, -7.67938, 2.28882e-05, -14.0463, 7.67938, -2.28882e-05, 14.0463, 0.547901, -2.64788, -0.969401 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0 )
 }
+
+[sub_resource type="Environment" id=6]
+background_mode = 1
+background_color = Color( 0.0980392, 0.0941176, 0.227451, 1 )
+ambient_light_color = Color( 0.843137, 0.839216, 0.94902, 1 )
+fog_enabled = true
+fog_color = Color( 0.0980392, 0.0941176, 0.227451, 1 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -77,3 +84,6 @@ transform = Transform( -0.980969, 0, 0.194166, 0, 1, 0, -0.194166, 0, -0.980969,
 
 [node name="evil_witch" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.0438461, 0, -0.999038, 0, 1, 0, 0.999038, 0, 0.0438461, 35.4883, 0.606966, 5.06674 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )

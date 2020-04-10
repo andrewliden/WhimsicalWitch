@@ -2,10 +2,11 @@ extends RigidBody
 
 
 const THROW_FORCE = Vector3(0, 10, 40)
-
+var explosion
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	explosion = preload("res://scenes/ent/potion_explosion.tscn")
 	apply_impulse(Vector3(0.1,1,0), THROW_FORCE)
 	add_to_group("projectiles")
 	add_to_group("potions")
@@ -21,7 +22,9 @@ func _process(delta):
 		explode()
 
 func explode():
-	print("The potion would have just exploded")
+	var explosionInstance = explosion.instance()
+	get_tree().get_root().add_child(explosionInstance)
+	explosionInstance.global_transform = global_transform
 	queue_free()
 
 #The timer expiring also causes the potion to explode.
