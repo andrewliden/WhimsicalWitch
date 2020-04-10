@@ -36,6 +36,7 @@ func _physics_process(delta):
 	handle_tilt(delta)
 	point_forwards(delta)
 	collision_check()
+	broadcast_position()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -128,7 +129,10 @@ func collision_check():
 			pass
 		else:
 			damage_player()
-	
+
+func broadcast_position():
+	get_tree().call_group("enemies", "update_player_position", self.global_transform.origin)
+
 func damage_player(amount = 10):
 	if !takingDamage:
 		takingDamage = true

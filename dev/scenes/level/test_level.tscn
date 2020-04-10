@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/char_playable/witch_camera_rig.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/char_npc/ghost.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/char_npc/jiangshi.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
-"points": PoolVector3Array( 61.3103, -0.00668335, 17.5094, -61.3103, 0.00668335, -17.5094, -0.128326, 0, -0.892241, -15.968, 1.80685, -26.1076, 15.968, -1.80685, 26.1076, -40.1884, 0.831978, 57.8168, -28.9013, -0.00701714, 13.8074, 28.9013, 0.00701714, -13.8074, 27.4287, 13.0859, 95.252, 61.5485, -0.0088501, 17.5171, -61.5485, 0.0088501, -17.5171, -0.128326, 0, -0.892241, 0, 0, 0, 0, 0, 0, -0.128326, 0, -0.892241, 0, 0, 0, 0, 0, 0, -0.128326, 0, -0.892241 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.128326, 0, -0.892241, 0.236601, -0.000205994, -16.713, -0.236601, 0.000205994, 16.713, -21.3765, -1.14505, 61.2638, 0, 0, 0, 0, 0, 0, -13.3511, -1.14506, 123.721 ),
+"tilts": PoolRealArray( 0, 0, 0 )
 }
 
 [sub_resource type="CubeMesh" id=2]
@@ -53,3 +55,9 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 12.6675, 6.43898, 23.5746 )
 shape = SubResource( 4 )
+
+[node name="ghost" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.546584, 0, 0.837404, 0, 1, 0, -0.837404, 0, -0.546584, -27.3928, 14.1381, -13.3411 )
+
+[node name="jiangshi" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.980969, 0, 0.194166, 0, 1, 0, -0.194166, 0, -0.980969, -15.9348, 0, 36.2603 )
