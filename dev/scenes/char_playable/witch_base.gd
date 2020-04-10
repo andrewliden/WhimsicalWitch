@@ -125,7 +125,7 @@ func collision_check():
 		var collider = collision.get_collider()
 		if collider.is_in_group("pickup"):
 			pass
-		elif collider.is_in_group("projectile") and spinning:
+		elif collider.is_in_group("projectiles") and spinning:
 			if collider.has_method("deflect"):
 				collider.deflect()
 		else:

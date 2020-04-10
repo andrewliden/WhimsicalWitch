@@ -8,7 +8,7 @@ const PREDICT_AMOUNT = 0.2
 const TIME_VARIANCE = 0.05
 var spell
 var canAttack = true
-var playerPos = Vector3(0,0,0)
+var playerPos = Vector3(INF,INF,INF)
 var playerFwd = Vector3(0,0,0)
 var dist = INF
 

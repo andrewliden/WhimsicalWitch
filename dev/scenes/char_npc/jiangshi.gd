@@ -4,7 +4,7 @@ const JUMP_WHEN_DIST_IS = 80
 const HIT_FORCE = 20
 const POINT_VALUE = 200
 
-var playerGlobalPosition = Vector3()
+var playerGlobalPosition = Vector3(INF, INF, INF)
 var dead = false
 
 # Called when the node enters the scene tree for the first time.
