@@ -20,11 +20,12 @@ func _process(delta):
 	track_witch()
 	check_boost_input()
 	follow_path(delta)
-	adjustFOV()
+	adjust_FOV()
 	if $witch_move_rig/witch_base.takingDamage:
 		shakeCam(delta)
 	else:
 		$Camera.set_rotation_degrees(Vector3(0,180,0))
+	update_gui()
 
 func track_witch():
 	$Camera.translation.x = $witch_move_rig.translation.x * CAMERA_TRACK_STRENGTH
@@ -47,7 +48,7 @@ func follow_path(delta):
 func _on_BoostTimer_timeout():
 	boost = 0
 
-func adjustFOV():
+func adjust_FOV():
 	if boost != 0:
 		var targetFOV = BOOST_FOV
 		if boost < 0:
@@ -66,6 +67,11 @@ func adjustFOV():
 
 func shakeCam(delta):
 	$Camera.rotate_z(rand_range(-SHAKE_AMOUNT, SHAKE_AMOUNT) * delta)
+
+func update_gui():
+	$GUI.set_boost(get_boost())
+	$GUI.set_health(get_health())
+	$GUI.toggle_raspberry_jam($witch_move_rig/witch_base.takingDamage)
 
 #Retrieves how much percent of your boost is left
 func get_boost():

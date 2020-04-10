@@ -1,0 +1,169 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/control/GUI.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 0, 0, 0.501961, 1, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 100
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 0, 0, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0.0509804, 1, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="GUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1.0
+margin_bottom = -1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RaspberryJam" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RedLeft" type="TextureRect" parent="RaspberryJam"]
+anchor_bottom = 1.0
+margin_right = 100.0
+texture = SubResource( 2 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RedRight" type="TextureRect" parent="RaspberryJam"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -100.0
+texture = SubResource( 2 )
+stretch_mode = 1
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthContainerMargin" type="MarginContainer" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 90.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthContainerGroup" type="VBoxContainer" parent="HealthContainerMargin"]
+margin_right = 80.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="HealthLabel" type="Label" parent="HealthContainerMargin/HealthContainerGroup"]
+margin_right = 80.0
+margin_bottom = 14.0
+text = "Health"
+
+[node name="HealthBar" type="ProgressBar" parent="HealthContainerMargin/HealthContainerGroup"]
+margin_top = 18.0
+margin_right = 80.0
+margin_bottom = 36.0
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+value = 50.0
+
+[node name="BoostContainerMargin" type="MarginContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -90.0
+margin_top = -50.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BoostContainerGroup" type="VBoxContainer" parent="BoostContainerMargin"]
+margin_right = 80.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="BoostLabel" type="Label" parent="BoostContainerMargin/BoostContainerGroup"]
+margin_right = 80.0
+margin_bottom = 14.0
+text = "Boost"
+
+[node name="BoostBar" type="ProgressBar" parent="BoostContainerMargin/BoostContainerGroup"]
+margin_top = 18.0
+margin_right = 80.0
+margin_bottom = 36.0
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 4 )
+max_value = 1.0
+value = 1.0
+
+[node name="ScoreContainerMargin" type="MarginContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -789.275
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="VBoxContainer" parent="ScoreContainerMargin"]
+margin_right = 779.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabelText" type="Label" parent="ScoreContainerMargin/Score"]
+margin_right = 779.0
+margin_bottom = 14.0
+text = "Score"
+align = 2
+
+[node name="ScoreLabelValue" type="Label" parent="ScoreContainerMargin/Score"]
+margin_top = 18.0
+margin_right = 779.0
+margin_bottom = 32.0
+text = "0"
+align = 2
