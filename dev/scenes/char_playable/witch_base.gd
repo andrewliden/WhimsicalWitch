@@ -126,12 +126,16 @@ func collision_check():
 		if collider.is_in_group("pickup"):
 			pass
 		elif collider.is_in_group("projectile") and spinning:
-			pass
+			if collider.has_method("deflect"):
+				collider.deflect()
 		else:
 			damage_player()
+			if collider.has_method("damage"):
+				collider.damage()
 
 func broadcast_position():
 	get_tree().call_group("enemies", "update_player_position", self.global_transform.origin)
+	get_tree().call_group("enemies", "update_player_forward_dir", self.global_transform.basis.z)
 
 func damage_player(amount = 10):
 	if !takingDamage:

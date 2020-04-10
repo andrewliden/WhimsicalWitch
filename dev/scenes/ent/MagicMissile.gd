@@ -17,7 +17,7 @@ func _physics_process(delta):
 		var target = collision.get_collider()
 		#If the object you collided with has a damage method, call it.
 		if target.has_method("damage"):
-			target.damage()
+			target.call("damage")
 		damage()
 
 func _on_DestroyTimer_timeout():

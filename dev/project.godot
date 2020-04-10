@@ -19,6 +19,10 @@ config/name="Witch Game (working title)"
 run/main_scene="res://scenes/level/test_level.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+global="*res://scenes/control/global.gd"
+
 [input]
 
 gameplay_left={

@@ -15,9 +15,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
 	#Automatically update the score.
-	#scoreDisplay.text = str(globalVars.score)
+	scoreDisplay.text = str(global.score)
 
 func set_health(amount):
 	healthbar.value = amount

@@ -2,6 +2,7 @@ extends RigidBody
 
 const JUMP_WHEN_DIST_IS = 80
 const HIT_FORCE = 20
+const POINT_VALUE = 200
 
 var playerGlobalPosition = Vector3()
 var dead = false
@@ -51,6 +52,7 @@ func checkCollisions():
 			if collider.has_method("damage"):
 				collider.damage()
 			if !dead:
+				global.score += POINT_VALUE
 				dead = true
 				set_mode(MODE_RIGID)
 				var hitSpot = to_local(collider.global_transform.origin)

@@ -1,13 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/char_playable/witch_camera_rig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/char_npc/ghost.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/char_npc/jiangshi.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/char_npc/evil_witch.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.128326, 0, -0.892241, 0.236601, -0.000205994, -16.713, -0.236601, 0.000205994, 16.713, -21.3765, -1.14505, 61.2638, 0, 0, 0, 0, 0, 0, -13.3511, -1.14506, 123.721 ),
-"tilts": PoolRealArray( 0, 0, 0 )
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -0.128326, 0, -0.892241, 0.169879, 0.0198669, -8.31909, -0.169879, -0.0198669, 8.31909, 0.310003, -7.62939e-06, 88.5889, 0.10691, 0.0303421, -12.6955, -0.10691, -0.0303421, 12.6955, -9.99398, -7.62939e-06, 118.528, -0.584033, 0.0288849, -12.074, 0.584033, -0.0288849, 12.074, -0.39266, -7.62939e-06, 152.649, 0, 0, 0, 0, 0, 0, 0.0474873, -7.62939e-06, 200.185 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
 }
 
 [sub_resource type="CubeMesh" id=2]
@@ -18,17 +19,22 @@ points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1
 [sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( -1, -1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1 )
 
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array( -3.46802, -6.48499e-05, -7.0038, 3.46802, 6.48499e-05, 7.0038, 0.49432, -2.71203, -1.0047, 7.4276, 0.000167847, -5.5687, -7.4276, -0.000167847, 5.5687, -10.2515, 2.86633, 22.1794, 4.54539, 1.14441e-05, 4.24824, -4.54539, -1.14441e-05, -4.24824, -26.8744, -2.46406, 20.7492, -6.89062, -7.62939e-06, 11.0969, 6.89062, 7.62939e-06, -11.0969, -32.174, -6.52756, 1.24398, -7.67938, 2.28882e-05, -14.0463, 7.67938, -2.28882e-05, 14.0463, 0.547901, -2.64788, -0.969401 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
 [node name="Spatial" type="Spatial"]
 
 [node name="Path" type="Path" parent="."]
-transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 12.5082, 0, -29.8359 )
+transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, -89.221 )
 curve = SubResource( 1 )
 
 [node name="PathFollow" type="PathFollow" parent="Path"]
 rotation_mode = 4
 
 [node name="witch_camera_rig" parent="Path/PathFollow" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 collision_layer = 7
@@ -56,8 +62,18 @@ material/0 = null
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 12.6675, 6.43898, 23.5746 )
 shape = SubResource( 4 )
 
-[node name="ghost" parent="." instance=ExtResource( 2 )]
+[node name="Path2" type="Path" parent="."]
 transform = Transform( -0.546584, 0, 0.837404, 0, 1, 0, -0.837404, 0, -0.546584, -27.3928, 14.1381, -13.3411 )
+curve = SubResource( 5 )
+
+[node name="PathFollow" type="PathFollow" parent="Path2"]
+rotation_mode = 4
+
+[node name="ghost" parent="Path2/PathFollow" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
 [node name="jiangshi" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.980969, 0, 0.194166, 0, 1, 0, -0.194166, 0, -0.980969, -15.9348, 0, 36.2603 )
+
+[node name="evil_witch" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.0438461, 0, -0.999038, 0, 1, 0, 0.999038, 0, 0.0438461, 35.4883, 0.606966, 5.06674 )
