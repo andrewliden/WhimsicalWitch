@@ -57,7 +57,7 @@ func attack(dist):
 func _on_AttackTimer_timeout():
 	canAttack = true
 
-func is_hit_by(node):
+func is_hit_by(_node):
 	#On damage, just increase the player's score and remove this from the queue.
 	global.score += 100
 	queue_free()

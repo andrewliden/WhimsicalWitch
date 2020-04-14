@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Area
 
 
 const speed = 100
@@ -12,14 +12,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	var collision = move_and_collide(transform.basis.z * speed * delta)
-	if collision:
-		var collider = collision.get_collider()
-		#Have collision management with enemies handled by the enemy.
-		if collider.is_in_group("enemies"):
-			collider.is_hit_by(self)
-		destroy_self()
+func _process(delta):
+	translate(Vector3(0,0,speed * delta))
 
 func _on_DestroyTimer_timeout():
 	destroy_self()
@@ -33,4 +27,11 @@ func destroy_self():
 	queue_free()
 	
 func is_hit_by(node):
+	destroy_self()
+
+
+func _on_MagicMissile_body_entered(body):
+	if body.is_in_group("enemies"):
+		if body.has_method("is_hit_by"):
+			body.is_hit_by(self)
 	destroy_self()

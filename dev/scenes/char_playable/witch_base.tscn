@@ -377,6 +377,7 @@ radius = 0.724394
 height = 2.44102
 
 [node name="witch_base" type="KinematicBody"]
+collision_mask = 5
 script = ExtResource( 5 )
 
 [node name="Broom" type="MeshInstance" parent="."]

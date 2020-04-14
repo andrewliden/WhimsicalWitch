@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Area
 
 
 var speed = -100
@@ -8,14 +8,8 @@ func _ready():
 	add_to_group("projectiles")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	var collision = move_and_collide(transform.basis.z * speed * delta)
-	if collision:
-		var target = collision.get_collider()
-		#If you hit anything other than the player, just destroy the projectile.
-		#If you hit the player, the collision will be handled by them so deflection can happen.
-		if !target.is_in_group("player"):
-			is_hit_by(target)
+func _process(delta):
+	translate(Vector3(0,0,speed * delta))
 
 func deflect():
 	speed = abs(speed)
@@ -23,5 +17,15 @@ func deflect():
 func _on_DestroyTimer_timeout():
 	queue_free()
 
-func is_hit_by(target):
+func is_hit_by(_target):
 	queue_free()
+
+
+func _on_MagicMissile_body_entered(body):
+	if(body.is_in_group("player")):
+		if body.spinning:
+			deflect()
+		else:
+			body.damage_player()
+	is_hit_by(body)
+	print(body)

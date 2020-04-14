@@ -127,19 +127,9 @@ func collision_check():
 	var collision = move_and_collide(Vector3(0,0,0), false, true, true)
 	if collision:
 		var collider = collision.get_collider()
-		if collider.is_in_group("pickup"):
+		if collider.is_in_group("pickup") or collider.is_in_group("projectiles"):
+			#Projectiles and pickups will perform their own collision checking.
 			pass
-		elif collider.is_in_group("projectiles"):
-			#For projectiles, check if you're spinning first.
-			if spinning:
-				#if you're spinning, deflect the projectile.
-				if collider.has_method("deflect"):
-					collider.deflect()
-			else:
-				#otherwise, take damage and remove the projectile
-				damage_player()
-				if collider.has_method("is_hit_by"):
-					collider.is_hit_by(self)
 		elif collider.is_in_group("enemies"):
 			damage_player()
 			if collider.has_method("is_hit_by"):

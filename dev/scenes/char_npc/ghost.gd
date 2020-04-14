@@ -16,7 +16,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Surprise":
 		queue_free()
 
-func is_hit_by(node):
+func is_hit_by(_node):
 	if $AnimationPlayer.current_animation == "Float":
 		global.score += POINT_VALUE
 		$AnimationPlayer.stop()
