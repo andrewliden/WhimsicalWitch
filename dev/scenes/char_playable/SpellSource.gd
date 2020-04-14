@@ -2,6 +2,7 @@ extends Spatial
 
 var magicMissile
 var potion
+var numPotions = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,9 @@ func _process(delta):
 		create_projectile(magicMissile)
 	if Input.is_action_just_pressed("gameplay_alt_fire"):
 		if get_tree().get_nodes_in_group("potions").size() == 0:
-			create_projectile(potion)
+			if numPotions > 0:
+				create_projectile(potion)
+				numPotions -= 1
 		
 func create_projectile(type):
 	var projectileInstance = type.instance()

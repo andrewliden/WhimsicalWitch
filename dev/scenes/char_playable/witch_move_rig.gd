@@ -56,6 +56,7 @@ func clamp_to_box():
 	if translation.y + motionVector.y < -MOVE_BOX.y:
 		var excess = translation.y + motionVector.y + MOVE_BOX.y
 		motionVector.y -= excess
+	
 
 func move():
 	translate(motionVector)

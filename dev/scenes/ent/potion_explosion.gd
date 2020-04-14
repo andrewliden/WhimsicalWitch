@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Area
 
 const MAX_SCALE = 40
 const MIN_SCALE = 0
@@ -7,10 +7,11 @@ const MIN_SCALE = 0
 func _ready():
 	scale = Vector3(1, 1, 1) * MIN_SCALE
 	add_to_group("projectiles")
+	add_to_group("potions")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if !$GrowTime.is_stopped():
 		grow()
 	else:
@@ -31,3 +32,8 @@ func _on_GrowTime_timeout():
 
 func _on_ShrinkTime_timeout():
 	queue_free()
+
+func _on_potion_explosion_body_entered(body):
+	if body.is_in_group("enemies"):
+		if body.has_method("is_hit_by"):
+			body.is_hit_by(self)

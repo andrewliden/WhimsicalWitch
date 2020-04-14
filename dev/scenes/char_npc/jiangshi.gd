@@ -21,7 +21,6 @@ func _physics_process(delta):
 		if $JumpTimer.is_stopped():
 			if floorCheck():
 				$JumpTimer.start()
-	checkCollisions()
 
 func floorCheck():
 	#Check the raycast and see if there's a collision.
@@ -45,21 +44,22 @@ func hop():
 func _on_JumpTimer_timeout():
 	hop()
 
-func checkCollisions():
-	var collisions = get_colliding_bodies()
-	for collider in collisions:
-		if collider.get_class() == "KinematicBody":
-			if collider.has_method("damage"):
-				collider.damage()
-			if !dead:
-				global.score += POINT_VALUE
-				dead = true
-				set_mode(MODE_RIGID)
-				var hitSpot = to_local(collider.global_transform.origin)
-				var hitImpulse = collider.transform.basis.z * HIT_FORCE
-				apply_impulse(hitSpot, hitImpulse)
-				$RemoveTimer.start()
-
+func is_hit_by(node):
+	if !dead:
+		global.score += POINT_VALUE
+		dead = true
+		set_mode(MODE_RIGID)
+		var hitSpot = to_local(node.global_transform.origin)
+		var hitImpulse = node.transform.basis.z * HIT_FORCE
+		apply_impulse(hitSpot, hitImpulse)
+		$RemoveTimer.start()
 
 func _on_RemoveTimer_timeout():
 	queue_free()
+
+
+func _on_jiangshi_body_entered(body):
+	if body.is_in_group("player") or body.is_in_group("projectiles"):
+		if body.has_method("is_hit_by"):
+			body.is_hit_by(self)
+		is_hit_by(body)

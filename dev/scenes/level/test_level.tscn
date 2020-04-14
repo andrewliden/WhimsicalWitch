@@ -57,8 +57,8 @@ transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 100, 4.74554, -5.16572, -0.17276
 shape = SubResource( 3 )
 
 [node name="StaticBody2" type="StaticBody" parent="."]
-collision_layer = 7
-collision_mask = 7
+collision_layer = 2
+collision_mask = 2
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 12.6675, 6.43898, 23.5746 )
@@ -84,6 +84,15 @@ transform = Transform( -0.980969, 0, 0.194166, 0, 1, 0, -0.194166, 0, -0.980969,
 
 [node name="evil_witch" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.0438461, 0, -0.999038, 0, 1, 0, 0.999038, 0, 0.0438461, 35.4883, 0.606966, 5.06674 )
+
+[node name="ghost" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.989629, 0, 0.143648, 0, 1, 0, -0.143648, 0, -0.989629, 0, 4.33848, -45.0016 )
+
+[node name="ghost2" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.989629, 0, 0.143648, 0, 1, 0, -0.143648, 0, -0.989629, 0, 9.15647, -45.0016 )
+
+[node name="ghost3" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.989629, 0, 0.143648, 0, 1, 0, -0.143648, 0, -0.989629, 6.67627, 9.15647, -45.0016 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )

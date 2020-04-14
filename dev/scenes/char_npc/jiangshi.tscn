@@ -329,5 +329,6 @@ collision_mask = 3
 
 [node name="RemoveTimer" type="Timer" parent="."]
 wait_time = 3.0
+[connection signal="body_entered" from="." to="." method="_on_jiangshi_body_entered"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_RemoveTimer_timeout"]

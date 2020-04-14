@@ -10,19 +10,13 @@ func _ready():
 func _physics_process(delta):
 	if get_parent().get("offset") != null:
 		get_parent().offset += MOVE_SPEED * delta
-	collision_check()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	#If the "surprise" animation just finished, this ghost was just banished.
 	if anim_name == "Surprise":
 		queue_free()
 
-func collision_check():
-	var collision = move_and_collide(Vector3(0,0,0), true, true, true)
-	if collision:
-		damage()
-
-func damage():
+func is_hit_by(node):
 	if $AnimationPlayer.current_animation == "Float":
 		global.score += POINT_VALUE
 		$AnimationPlayer.stop()

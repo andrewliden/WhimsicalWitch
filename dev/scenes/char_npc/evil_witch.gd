@@ -25,12 +25,7 @@ func _physics_process(delta):
 	#Get the distance to the player
 	dist = global_transform.origin.distance_to(playerPos)
 	attack_check()
-	var motion = Vector3(0,0,0)
-	if dist <= WALK_DIST:
-		motion = transform.basis.z * SPEED
-	motion += GRAVITY
-	move_and_collide(motion * delta)
-	
+	movement(delta)
 	
 func attack_check():
 	if canAttack:
@@ -42,11 +37,17 @@ func attack_check():
 			if dist <= ATTACK_DIST:
 				attack(dist)
 
+func movement(delta):
+	var motion = Vector3(0,0,0)
+	if dist <= WALK_DIST:
+		motion = transform.basis.z * SPEED
+	motion += GRAVITY
+	return move_and_collide(motion * delta)
+
 func attack(dist):
 	var targetPos = playerPos + playerFwd * PREDICT_AMOUNT
 	$SpellSource.look_at(targetPos, Vector3(0,1,0))
 	var spellInstance = spell.instance()
-	#$SpellSource.add_child(spellInstance)
 	get_parent().add_child(spellInstance)
 	spellInstance.global_transform = $SpellSource.global_transform
 	
@@ -56,7 +57,7 @@ func attack(dist):
 func _on_AttackTimer_timeout():
 	canAttack = true
 
-func damage():
+func is_hit_by(node):
 	#On damage, just increase the player's score and remove this from the queue.
 	global.score += 100
 	queue_free()

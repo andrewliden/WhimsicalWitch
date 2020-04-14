@@ -3,7 +3,7 @@ extends KinematicBody
 ###Constants###
 const MOUSE_SENSITIVITY = 0.25
 const MAX_SPEED = 50
-const NUDGE_AMOUNT = 0.2
+const NUDGE_AMOUNT = 0.175
 const POINT_FWD_SPEED = 10
 const ROTATE_THRESHOLD = 0.1
 const SPIN_SPEED = 20
@@ -37,6 +37,7 @@ func _physics_process(delta):
 	point_forwards(delta)
 	collision_check()
 	broadcast_position()
+	check_mouse_unlock()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -62,6 +63,9 @@ func clamp_motion_speed(delta):
 		motionVector = motionVector.normalized() * MAX_SPEED * delta
 
 func apply_nudge(delta):
+	#I saw a tutorial that uses a guide that the player looks at instead of this approach.
+	#after this project is done, I might experiment with that.  This seems to work alright, though.
+	
 	#When the player moves the mouse, rotate the model in an axis orthogonal to the direction of movement,
 	#And within the 2D plane of the player's movement (that is, we're ignoring Z)
 	var nudgeVector = Vector3(motionVector.y * -1, motionVector.x, 0) * NUDGE_AMOUNT
@@ -125,17 +129,40 @@ func collision_check():
 		var collider = collision.get_collider()
 		if collider.is_in_group("pickup"):
 			pass
-		elif collider.is_in_group("projectiles") and spinning:
-			if collider.has_method("deflect"):
-				collider.deflect()
+		elif collider.is_in_group("projectiles"):
+			#For projectiles, check if you're spinning first.
+			if spinning:
+				#if you're spinning, deflect the projectile.
+				if collider.has_method("deflect"):
+					collider.deflect()
+			else:
+				#otherwise, take damage and remove the projectile
+				damage_player()
+				if collider.has_method("is_hit_by"):
+					collider.is_hit_by(self)
+		elif collider.is_in_group("enemies"):
+			damage_player()
+			if collider.has_method("is_hit_by"):
+				collider.is_hit_by(self)
 		else:
 			damage_player()
-			if collider.has_method("damage"):
-				collider.damage()
+		
 
 func broadcast_position():
 	get_tree().call_group("enemies", "update_player_position", self.global_transform.origin)
 	get_tree().call_group("enemies", "update_player_forward_dir", self.global_transform.basis.z)
+
+func check_mouse_unlock():
+	#This function checks for the ui cancel input.
+	#if it gets it, the mouse mode is toggled between visible and captured.
+	if Input.is_action_just_pressed("ui_cancel"):
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func is_hit_by(node):
+	damage_player()
 
 func damage_player(amount = 10):
 	if !takingDamage:

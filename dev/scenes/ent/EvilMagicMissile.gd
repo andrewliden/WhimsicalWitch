@@ -12,14 +12,10 @@ func _physics_process(delta):
 	var collision = move_and_collide(transform.basis.z * speed * delta)
 	if collision:
 		var target = collision.get_collider()
-		if target.is_in_group("player"):
-			if target.spinning:
-				deflect()
-			else:
-				target.damage_player()
-				destroy_self()
-		else:
-			destroy_self()
+		#If you hit anything other than the player, just destroy the projectile.
+		#If you hit the player, the collision will be handled by them so deflection can happen.
+		if !target.is_in_group("player"):
+			is_hit_by(target)
 
 func deflect():
 	speed = abs(speed)
@@ -27,5 +23,5 @@ func deflect():
 func _on_DestroyTimer_timeout():
 	queue_free()
 
-func destroy_self():
+func is_hit_by(target):
 	queue_free()
