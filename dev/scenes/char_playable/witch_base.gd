@@ -159,3 +159,11 @@ func _on_SpinTimer_timeout():
 
 func _on_DamageTimer_timeout():
 	takingDamage = false
+
+func get_spell_powerup():
+	$SpellSource.splitShot = true
+
+func get_health_pickup():
+	health += 25
+	if health > MAX_HEALTH:
+		health = MAX_HEALTH

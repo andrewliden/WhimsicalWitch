@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/char_playable/witch_camera_rig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/char_npc/ghost.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/char_npc/jiangshi.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/char_npc/evil_witch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ent/powerup_spell.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/ent/health_potion_pickup.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -96,3 +98,9 @@ transform = Transform( -0.989629, 0, 0.143648, 0, 1, 0, -0.143648, 0, -0.989629,
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )
+
+[node name="book" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74603, 6.83656, -57.4205 )
+
+[node name="potion" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.56414, -70.7912 )
