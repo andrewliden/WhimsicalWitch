@@ -4,6 +4,7 @@ var splittingMissile
 var magicMissile
 var potion
 var numPotions = 3
+var splitShot = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("gameplay_fire"):
-		create_projectile(splittingMissile)
+		if splitShot:
+			create_projectile(splittingMissile)
+		else:
+			create_projectile(magicMissile)
 	if Input.is_action_just_pressed("gameplay_alt_fire"):
 		if get_tree().get_nodes_in_group("potions").size() == 0:
 			if numPotions > 0:

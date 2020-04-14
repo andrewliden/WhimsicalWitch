@@ -57,8 +57,8 @@ transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 100, 4.74554, -5.16572, -0.17276
 shape = SubResource( 3 )
 
 [node name="StaticBody2" type="StaticBody" parent="."]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 3
+collision_mask = 3
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 12.6675, 6.43898, 23.5746 )

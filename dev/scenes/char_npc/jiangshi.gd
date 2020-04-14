@@ -4,6 +4,8 @@ const JUMP_WHEN_DIST_IS = 80
 const HIT_FORCE = 20
 const POINT_VALUE = 200
 
+var playerDetected = false
+var player
 var playerGlobalPosition = Vector3(INF, INF, INF)
 var dead = false
 
@@ -11,13 +13,12 @@ var dead = false
 func _ready():
 	add_to_group("enemies")
 
-func update_player_position(var globalTranslation):
-	playerGlobalPosition = globalTranslation
+func getPlayerPos():
+	playerGlobalPosition = player.global_transform.origin
 
 func _physics_process(delta):
-	var dist = self.global_transform.origin.distance_to(playerGlobalPosition)
-			
-	if dist <= JUMP_WHEN_DIST_IS:
+	if playerDetected:
+		getPlayerPos()
 		if $JumpTimer.is_stopped():
 			if floorCheck():
 				$JumpTimer.start()
@@ -56,3 +57,12 @@ func is_hit_by(node):
 
 func _on_RemoveTimer_timeout():
 	queue_free()
+
+func _on_PlayerDetector_body_entered(body):
+	if body.is_in_group("player"):
+		player = body
+		playerDetected = true
+
+func _on_PlayerDetector_body_exited(body):
+	if body.is_in_group("player"):
+		playerDetected = false
