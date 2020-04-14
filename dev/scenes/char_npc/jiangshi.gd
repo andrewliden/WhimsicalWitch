@@ -56,10 +56,3 @@ func is_hit_by(node):
 
 func _on_RemoveTimer_timeout():
 	queue_free()
-
-
-func _on_jiangshi_body_entered(body):
-	if body.is_in_group("player") or body.is_in_group("projectiles"):
-		if body.has_method("is_hit_by"):
-			body.is_hit_by(self)
-		is_hit_by(body)

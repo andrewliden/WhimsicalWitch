@@ -1,5 +1,6 @@
 extends Spatial
 
+var splittingMissile
 var magicMissile
 var potion
 var numPotions = 3
@@ -8,12 +9,13 @@ var numPotions = 3
 func _ready():
 	magicMissile = preload("res://scenes/ent/MagicMissile.tscn")
 	potion = preload("res://scenes/ent/potion.tscn")
+	splittingMissile = preload("res://scenes/ent/SplittingMagicMissile.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("gameplay_fire"):
-		create_projectile(magicMissile)
+		create_projectile(splittingMissile)
 	if Input.is_action_just_pressed("gameplay_alt_fire"):
 		if get_tree().get_nodes_in_group("potions").size() == 0:
 			if numPotions > 0:
