@@ -28,4 +28,3 @@ func _on_MagicMissile_body_entered(body):
 		else:
 			body.damage_player()
 	is_hit_by(body)
-	print(body)

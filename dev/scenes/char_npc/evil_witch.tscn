@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/models_materials/evil_witch/Skin.material" type="Material" id=1]
 [ext_resource path="res://assets/models_materials/evil_witch/Shoes.material" type="Material" id=2]
@@ -156,6 +156,9 @@ tracks/10/keys = PoolRealArray( 0, 1, 0, 2.98023e-08, -1.77636e-15, 0, 0, 0, 1, 
 radius = 1.09878
 height = 0.71435
 
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 80, 80, 80 )
+
 [node name="evil_witch" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05683, 0 )
 collision_layer = 3
@@ -245,4 +248,11 @@ __meta__ = {
 
 [node name="SpellSource" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18936, 0.415461, 0 )
+
+[node name="PlayerDetector" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerDetector"]
+shape = SubResource( 5 )
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

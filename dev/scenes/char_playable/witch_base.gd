@@ -36,7 +36,6 @@ func _physics_process(delta):
 	handle_tilt(delta)
 	point_forwards(delta)
 	collision_check()
-	broadcast_position()
 	check_mouse_unlock()
 
 func _input(event):
@@ -137,11 +136,6 @@ func collision_check():
 		else:
 			damage_player()
 		
-
-func broadcast_position():
-	get_tree().call_group("enemies", "update_player_position", self.global_transform.origin)
-	get_tree().call_group("enemies", "update_player_forward_dir", self.global_transform.basis.z)
-
 func check_mouse_unlock():
 	#This function checks for the ui cancel input.
 	#if it gets it, the mouse mode is toggled between visible and captured.

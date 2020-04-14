@@ -7,10 +7,12 @@ const ATTACK_DIST = 80
 const PREDICT_AMOUNT = 0.2
 const TIME_VARIANCE = 0.05
 var spell
+var playerDetected = false
 var canAttack = true
 var playerPos = Vector3(INF,INF,INF)
 var playerFwd = Vector3(0,0,0)
 var dist = INF
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,8 +26,10 @@ func _ready():
 func _physics_process(delta):
 	#Get the distance to the player
 	dist = global_transform.origin.distance_to(playerPos)
-	attack_check()
-	movement(delta)
+	if playerDetected:
+		getPlayerStats()
+		attack_check()
+		movement(delta)
 	
 func attack_check():
 	if canAttack:
@@ -62,8 +66,17 @@ func is_hit_by(_node):
 	global.score += 100
 	queue_free()
 	
-func update_player_position(positionVector):
-	playerPos = positionVector
+func getPlayerStats():
+	playerPos = player.global_transform.origin
+	playerFwd = player.transform.basis.z
 
-func update_player_forward_dir(basisZvector):
-	playerFwd = basisZvector
+
+func _on_PlayerDetector_body_entered(body):
+	if body.is_in_group("player"):
+		playerDetected = true
+		player = body
+
+
+func _on_PlayerDetector_body_exited(body):
+	if body.is_in_group("player"):
+		playerDetected = false
