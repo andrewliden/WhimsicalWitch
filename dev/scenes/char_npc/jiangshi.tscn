@@ -233,6 +233,7 @@ extents = Vector3( 1.37052, 0.721815, 0.816184 )
 extents = Vector3( 40, 40, 45 )
 
 [node name="jiangshi" type="RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41757, 0 )
 collision_layer = 3
 collision_mask = 3
 mode = 2

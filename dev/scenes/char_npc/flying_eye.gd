@@ -1,8 +1,9 @@
 extends KinematicBody
 
-const MOVE_SPEED = 20
+const MOVE_SPEED = 10
 const TIMER_VARIANCE_MUL = 0.1
 const PREDICT_AMOUNT = 0.2
+const POINT_VALUE = 200
 
 var canShoot = false
 var playerDetected = false
@@ -40,6 +41,7 @@ func aim():
 	$BulletSource.look_at(targetPos, Vector3(0,1,0))
 
 func is_hit_by(_node):
+	global.score += POINT_VALUE
 	queue_free()
 
 func _on_ShootArea_body_entered(body):

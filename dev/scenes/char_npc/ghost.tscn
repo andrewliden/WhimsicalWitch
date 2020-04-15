@@ -311,7 +311,7 @@ collision_mask = 3
 script = ExtResource( 3 )
 
 [node name="GhostModel" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50353, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.184082, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="GhostModel"]
 bones/0/name = "lower_body"
@@ -368,6 +368,6 @@ anims/Surprise = SubResource( 5 )
 anims/SurpriseShapeKey = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.41964, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.100192, 0 )
 shape = SubResource( 7 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

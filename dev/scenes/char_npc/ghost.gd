@@ -1,6 +1,6 @@
 extends KinematicBody
 
-const MOVE_SPEED = 20
+const MOVE_SPEED = 10
 const POINT_VALUE = 200
 
 # Called when the node enters the scene tree for the first time.
