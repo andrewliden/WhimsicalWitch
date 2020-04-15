@@ -32,7 +32,7 @@ surfaces/1 = {
 }
 
 [sub_resource type="OpenSimplexNoise" id=2]
-period = 54.9905
+period = 71.0876
 lacunarity = 1.5
 
 [sub_resource type="NoiseTexture" id=3]
@@ -90,7 +90,7 @@ radial_segments = 32
 rings = 16
 
 [sub_resource type="OpenSimplexNoise" id=7]
-period = 37.132
+period = 55.5287
 
 [sub_resource type="NoiseTexture" id=8]
 noise = SubResource( 7 )
@@ -107,7 +107,7 @@ radius = 3.5
 script = ExtResource( 3 )
 
 [node name="Pivot" type="Spatial" parent="."]
-transform = Transform( 0.223351, 0, 0.974738, 0, 1, 0, -0.974738, 0, 0.223351, 0, -0.0716996, 0 )
+transform = Transform( -0.938969, 0, 0.344003, 0, 1, 0, -0.344003, 0, -0.938969, 0, 0.388217, 0 )
 
 [node name="PotionMesh" type="MeshInstance" parent="Pivot"]
 transform = Transform( 1, 0, 0, 0, 0.763423, 0.429685, 0, -0.415938, 0.788655, 0, -0.367509, 1.24755 )
