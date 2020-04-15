@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/ent/potion_explosion.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/potion_effect/potion_effect6.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/textures/potion_effect/potion_effect7.png" type="Texture" id=7]
 [ext_resource path="res://assets/textures/potion_effect/potion_effect5.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/potion_effect/potion_effect1.png" type="Texture" id=9]
+[ext_resource path="res://assets/audio/explode.wav" type="AudioStream" id=10]
 
 [sub_resource type="SphereShape" id=1]
 
@@ -65,6 +66,12 @@ one_shot = true
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
 material/0 = SubResource( 4 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 10 )
+unit_db = 50.0
+pitch_scale = 0.75
+autoplay = true
 [connection signal="body_entered" from="." to="." method="_on_potion_explosion_body_entered"]
 [connection signal="timeout" from="GrowTime" to="." method="_on_GrowTime_timeout"]
 [connection signal="timeout" from="ShrinkTime" to="." method="_on_ShrinkTime_timeout"]

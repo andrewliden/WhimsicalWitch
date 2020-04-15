@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/ent/MagicMissile.gd" type="Script" id=1]
 [ext_resource path="res://assets/models_materials/magic_missile/MagicMissile.tres" type="Material" id=2]
+[ext_resource path="res://assets/audio/laser6.ogg" type="AudioStream" id=3]
 
 [sub_resource type="SphereShape" id=1]
 radius = 1.18808
@@ -29,5 +30,10 @@ autostart = true
 __meta__ = {
 "_editor_description_": "Adjust wait time to determine how long magic missiles stay in the game"
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )
+unit_db = 20.0
+autoplay = true
 [connection signal="body_entered" from="." to="." method="_on_MagicMissile_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
