@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/models_materials/flying_eye/Eye.material" type="Material" id=1]
 [ext_resource path="res://assets/models_materials/flying_eye/Wing_Dark.material" type="Material" id=2]
@@ -102,7 +102,15 @@ tracks/4/keys = PoolRealArray( 0, 1, 0, 0, 0, -1.86265e-08, 1.49012e-08, -1.1175
 radius = 1.31756
 height = 2.45813
 
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -39.0718, -24.5943, -6.67066, -39.0718, -24.5943, 6.67066, -38.324, -24.7298, -10.5376, -38.324, -24.7298, 10.5376, -37.4289, -24.7689, -13.4353, -37.4289, -24.7689, 13.4353, -37.0823, -21.5186, -2.70085, -37.0823, -21.5186, 2.70085, -34.2221, -21.4271, 14.4088, -34.1582, -24.4875, -19.9257, -34.1582, -24.4875, 19.9257, -32.3642, -24.5658, -22.8467, -32.3642, -24.5658, 22.8467, -30.1321, -24.3042, -25.4177, -30.1321, -24.3042, 25.4177, -25.4163, -24.2912, -30.1193, -25.4163, -24.2912, 30.1193, -19.9252, -24.4808, -34.1523, -19.9251, -24.4808, 34.1523, -16.1704, -24.5494, 36.1487, -14.4049, -21.4249, -34.2221, -10.5337, -24.7262, -38.322, -10.5337, -24.7262, 38.322, -6.66997, -24.5997, -39.0762, -6.66997, -24.5997, 39.0762, -4.53265, 19.2255, -0.895293, -4.53265, 19.2255, 0.895293, -2.70712, -21.5311, -37.0919, -2.70712, -21.5311, 37.0919, -1.79976, 14.6068, -8.11118, -1.79976, 14.6067, 8.11118, -0.888167, 23.4356, -0.882867, -0.888167, 23.4356, 0.882867, 0.891719, 23.4324, -0.882745, 0.891719, 23.4324, 0.882746, 1.80335, 14.6061, -8.11082, 1.80335, 14.6061, 8.11082, 2.71077, -21.5309, -37.0916, 2.71077, -21.5309, 37.0916, 6.67347, -24.599, -39.0752, 6.67347, -24.599, 39.0752, 8.1126, 14.6067, -1.79443, 8.1126, 14.6067, 1.79443, 10.5369, -24.7251, -38.3203, 10.5369, -24.7251, 38.3203, 16.1679, -24.5515, -36.1518, 16.1679, -24.5516, 36.1518, 19.9196, -24.4882, -34.1625, 19.9196, -24.4882, 34.1625, 25.4158, -24.2945, -30.1233, 25.4158, -24.2945, 30.1233, 30.1239, -24.2946, -25.4152, 30.1239, -24.2946, 25.4152, 34.1601, -24.4917, -19.9291, 34.1601, -24.4917, 19.9291, 34.2201, -21.4235, -14.4064, 36.1526, -24.5519, 16.167, 37.0784, -21.5142, -2.70756, 37.0784, -21.5142, 2.70756, 37.6218, -22.7523, 6.41513, 38.3208, -24.7254, -10.5357, 38.3208, -24.7254, 10.5357, 39.0705, -24.5912, -6.66217, 39.0705, -24.5912, 6.66217 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 70, 40, 70 )
+
 [node name="flying_eye" type="KinematicBody"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 4 )
 
 [node name="FlyingEyeArmature" type="Spatial" parent="."]
@@ -148,3 +156,30 @@ anims/FlapWings = SubResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 4 )
+
+[node name="SpellSource" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.83789 )
+
+[node name="ShootArea" type="Area" parent="."]
+
+[node name="VisionCone" type="CollisionShape" parent="ShootArea"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 23.4014 )
+visible = false
+shape = SubResource( 5 )
+
+[node name="BulletSource" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60575 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="PlayerDetectionArea" type="Area" parent="."]
+
+[node name="DetectionBox" type="CollisionShape" parent="PlayerDetectionArea"]
+visible = false
+shape = SubResource( 6 )
+[connection signal="body_entered" from="ShootArea" to="." method="_on_ShootArea_body_entered"]
+[connection signal="body_exited" from="ShootArea" to="." method="_on_ShootArea_body_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_on_PlayerDetectionArea_body_entered"]
+[connection signal="body_exited" from="PlayerDetectionArea" to="." method="_on_PlayerDetectionArea_body_exited"]

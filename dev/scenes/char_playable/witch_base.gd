@@ -145,7 +145,7 @@ func check_mouse_unlock():
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func is_hit_by(node):
+func is_hit_by(_node):
 	damage_player()
 
 func damage_player(amount = 10):

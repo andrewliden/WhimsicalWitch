@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/char_playable/witch_camera_rig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/char_npc/ghost.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/char_npc/evil_witch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ent/powerup_spell.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/ent/health_potion_pickup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/char_npc/flying_eye.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -33,6 +34,12 @@ background_color = Color( 0.0980392, 0.0941176, 0.227451, 1 )
 ambient_light_color = Color( 0.843137, 0.839216, 0.94902, 1 )
 fog_enabled = true
 fog_color = Color( 0.0980392, 0.0941176, 0.227451, 1 )
+
+[sub_resource type="Curve3D" id=7]
+_data = {
+"points": PoolVector3Array( 1.8714, 0, -17.0156, -1.8714, 0, 17.0156, 33.2883, 0, -3.43632, 2.96777, -3.05176e-05, 27.7699, -2.96777, 3.05176e-05, -27.7699, -24.971, 0.000183105, -8.46709, -0.175507, 7.62939e-05, -24.3214, 0.175507, -7.62939e-05, 24.3214, 33.2883, 0, -3.43632 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
 
 [node name="Spatial" type="Spatial"]
 
@@ -81,6 +88,12 @@ rotation_mode = 4
 [node name="ghost" parent="Path2/PathFollow" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0 )
 
+[node name="ghost2" parent="Path2/PathFollow" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
+
+[node name="ghost3" parent="Path2/PathFollow" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20 )
+
 [node name="jiangshi" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.980969, 0, 0.194166, 0, 1, 0, -0.194166, 0, -0.980969, -15.9348, 0, 36.2603 )
 
@@ -104,3 +117,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74603, 6.83656, -57.4205 )
 
 [node name="potion" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.56414, -70.7912 )
+
+[node name="Path3" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+curve = SubResource( 7 )
+
+[node name="PathFollow" type="PathFollow" parent="Path3"]
+rotation_mode = 4
+
+[node name="flying_eye" parent="Path3/PathFollow" instance=ExtResource( 7 )]
+
+[node name="flying_eye2" parent="Path3/PathFollow" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.03391, 0, -3.87937 )
+
+[node name="flying_eye3" parent="Path3/PathFollow" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35551, 0, -3.53424 )

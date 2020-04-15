@@ -44,7 +44,7 @@ func destroy_self():
 	explosionInstance.global_transform.origin = self.global_transform.origin
 	queue_free()
 
-func is_hit_by(node):
+func is_hit_by(_node):
 	destroy_self()
 
 
