@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Witch Game (working title)"
+config/name="Whimsical Witch"
 run/main_scene="res://scenes/level/test_level.tscn"
 config/icon="res://icon.png"
 

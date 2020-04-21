@@ -1,13 +1,13 @@
 extends RigidBody
 
 
-const THROW_FORCE = Vector3(0, 10, 40)
 var explosion
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	explosion = preload("res://scenes/ent/potion_explosion.tscn")
-	apply_impulse(Vector3(0.1,1,0), THROW_FORCE)
+	var throwForce = transform.basis.z * 40 + transform.basis.y * 10
+	apply_impulse(Vector3(0.1,1,0), throwForce)
 	add_to_group("projectiles")
 	add_to_group("potions")
 

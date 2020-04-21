@@ -26,3 +26,6 @@ func set_boost(amount):
 
 func toggle_raspberry_jam(onoff):
 	$RaspberryJam.visible = onoff
+	
+func set_bombs(amount):
+	$BoostContainerMargin/BoostContainerGroup/BombsGroup/numBombsLabel.text = str(amount)

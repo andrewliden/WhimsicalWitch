@@ -120,18 +120,33 @@ __meta__ = {
 
 [node name="BoostContainerGroup" type="VBoxContainer" parent="BoostContainerMargin"]
 margin_right = 80.0
-margin_bottom = 50.0
+margin_bottom = 54.0
 rect_min_size = Vector2( 0, 50 )
 
-[node name="BoostLabel" type="Label" parent="BoostContainerMargin/BoostContainerGroup"]
+[node name="BombsGroup" type="HBoxContainer" parent="BoostContainerMargin/BoostContainerGroup"]
 margin_right = 80.0
 margin_bottom = 14.0
+
+[node name="bombsLabel" type="Label" parent="BoostContainerMargin/BoostContainerGroup/BombsGroup"]
+margin_right = 45.0
+margin_bottom = 14.0
+text = "Bombs"
+
+[node name="numBombsLabel" type="Label" parent="BoostContainerMargin/BoostContainerGroup/BombsGroup"]
+margin_left = 49.0
+margin_right = 49.0
+margin_bottom = 14.0
+
+[node name="BoostLabel" type="Label" parent="BoostContainerMargin/BoostContainerGroup"]
+margin_top = 18.0
+margin_right = 80.0
+margin_bottom = 32.0
 text = "Boost"
 
 [node name="BoostBar" type="ProgressBar" parent="BoostContainerMargin/BoostContainerGroup"]
-margin_top = 18.0
+margin_top = 36.0
 margin_right = 80.0
-margin_bottom = 36.0
+margin_bottom = 54.0
 custom_styles/fg = SubResource( 5 )
 custom_styles/bg = SubResource( 4 )
 max_value = 1.0

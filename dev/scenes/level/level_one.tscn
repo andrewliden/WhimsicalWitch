@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/level/scene_objects/level_one_floor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/level/scene_objects/archway.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/char_playable/witch_camera_rig.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0.109804, 0.109804, 0.376471, 1 )
+ambient_light_color = Color( 0.4897, 0.4897, 0.83, 1 )
+fog_enabled = true
+fog_color = Color( 0.109804, 0.109804, 0.376471, 1 )
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 2.22297, 0, -0.0142212, -0.535657, -9.53674e-07, -32.1123, 0.535657, 9.53674e-07, 32.1123, 4.61951, 0, 115.334, 5.79963, -9.53674e-07, -34.2577, -5.79963, 9.53674e-07, 34.2577, 10.2581, 0, 237.218, 4.90712, -9.06982, -34.4672, -4.90712, 9.06982, 34.4672, -35.9799, 19.2305, 360.131, -3.70987, 0, -41.5931, 3.70987, 0, 41.5931, -50.6418, 45.2285, 493.312, -4.6489, 0, -14.6619, 4.6489, 0, 14.6619, -29.0636, 47.4051, 602.776, -1.85312, 0, -39.2859, 1.85312, 0, 39.2859, -3.12396, 41.4109, 719.916, 4.57846, -7.62939e-05, -24.4185, -4.57846, 7.62939e-05, 24.4185, -12.2378, 36.3825, 820.615, -0.364738, 1.52588e-05, -32.827, 0.364738, -1.52588e-05, 32.827, -47.192, 44.1183, 945.508, -0.326633, 0, -26.4567, 0.326633, 0, 26.4567, -27.9683, 61.6745, 1066.91, 0, 0, 0, 0, 0, 0, -24.0916, 66.025, 1172.53 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="Spatial" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Path" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 14.75, -600 )
+curve = SubResource( 2 )
+
+[node name="Dolly" type="PathFollow" parent="Path"]
+
+[node name="witch_camera_rig" parent="Path/Dolly" instance=ExtResource( 3 )]
+
+[node name="floor" parent="." instance=ExtResource( 1 )]
+
+[node name="FloorCollision" parent="floor" index="1"]
+visible = false
+
+[node name="archway" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1.20511, 0, -0.331966, 0, 1.25, 0, 0.331966, 0, -1.20511, -38.5306, 29.2703, 6.09148 )
+
+[editable path="floor"]

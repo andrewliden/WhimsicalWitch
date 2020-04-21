@@ -72,6 +72,7 @@ func update_gui():
 	$GUI.set_boost(get_boost())
 	$GUI.set_health(get_health())
 	$GUI.toggle_raspberry_jam($witch_move_rig/witch_base.takingDamage)
+	$GUI.set_bombs($witch_move_rig/witch_base/SpellSource.numPotions)
 
 #Retrieves how much percent of your boost is left
 func get_boost():
