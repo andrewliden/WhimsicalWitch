@@ -19,4 +19,10 @@ func _ready():
 func _on_potion_body_entered(body):
 	if body.is_in_group("player"):
 		body.get_health_pickup()
-		queue_free()
+		$PickupSound.play()
+		$DestroyTimer.start()
+		set_visible(false)
+
+
+func _on_DestroyTimer_timeout():
+	queue_free()

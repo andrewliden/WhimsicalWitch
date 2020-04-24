@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/ent/book_upgrade.gd" type="Script" id=1]
 [ext_resource path="res://assets/models_materials/spell_book/BookMaterial.material" type="Material" id=2]
-
+[ext_resource path="res://assets/audio/powerup.ogg" type="AudioStream" id=3]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
@@ -59,18 +59,18 @@ height = 7.0
 radial_segments = 32
 rings = 16
 
-[sub_resource type="OpenSimplexNoise" id=6]
+[sub_resource type="OpenSimplexNoise" id=5]
 period = 20.0
 
-[sub_resource type="NoiseTexture" id=7]
+[sub_resource type="NoiseTexture" id=6]
 width = 128
 height = 128
-noise = SubResource( 6 )
+noise = SubResource( 5 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=7]
 params_blend_mode = 1
 albedo_color = Color( 0.47451, 0.490196, 0.196078, 1 )
-albedo_texture = SubResource( 7 )
+albedo_texture = SubResource( 6 )
 
 [node name="book" type="Area"]
 script = ExtResource( 1 )
@@ -90,5 +90,13 @@ shape = SubResource( 3 )
 [node name="Glow" type="MeshInstance" parent="."]
 transform = Transform( 0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 0, 0.476319, 0 )
 mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+material/0 = SubResource( 7 )
+
+[node name="PowerupSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )
+unit_db = 10.0
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 1.5
 [connection signal="body_entered" from="." to="." method="_on_book_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

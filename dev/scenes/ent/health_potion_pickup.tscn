@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/models_materials/potion_bottle/Liquid.material" type="Material" id=1]
 [ext_resource path="res://assets/models_materials/potion_bottle/Glass.material" type="Material" id=2]
 [ext_resource path="res://scenes/ent/health_potion_pickup.gd" type="Script" id=3]
+[ext_resource path="res://assets/audio/health_pickup.ogg" type="AudioStream" id=4]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Sphere"
@@ -125,4 +126,12 @@ material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 10 )
+
+[node name="PickupSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_db = 10.0
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 0.7
 [connection signal="body_entered" from="." to="." method="_on_potion_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

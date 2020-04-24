@@ -19,4 +19,9 @@ func _ready():
 func _on_book_body_entered(body):
 	if body.is_in_group("player"):
 		body.get_spell_powerup()
-		queue_free()
+		$PowerupSound.play()
+		$DestroyTimer.start()
+		set_visible(false)
+
+func _on_DestroyTimer_timeout():
+	queue_free()
