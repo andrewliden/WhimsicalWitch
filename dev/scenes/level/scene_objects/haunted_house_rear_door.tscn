@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/models_materials/levels/level_one/env/Floor.material" type="Material" id=1]
 [ext_resource path="res://assets/models_materials/levels/level_one/env/WallMaterial.material" type="Material" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/models_materials/levels/level_one/env/DoorWood_001.material" type="Material" id=5]
 [ext_resource path="res://assets/models_materials/levels/level_one/env/Roof.material" type="Material" id=6]
 [ext_resource path="res://assets/models_materials/levels/level_one/env/DoorWood.material" type="Material" id=7]
+[ext_resource path="res://scenes/level/scene_objects/onhit_rotate.gd" type="Script" id=8]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "House"
@@ -154,52 +155,53 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.5, 20, 0 )
 shape = SubResource( 4 )
 
-[node name="FrontLeftDoor" type="KinematicBody" parent="."]
+[node name="FrontLeftDoor" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 50 )
 collision_layer = 7
 collision_mask = 7
+script = ExtResource( 8 )
 
 [node name="LeftDoor" type="MeshInstance" parent="FrontLeftDoor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 50 )
 mesh = SubResource( 5 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="FrontLeftDoor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 50 )
 shape = SubResource( 6 )
 
-[node name="FrontRightDoor" type="KinematicBody" parent="."]
+[node name="FrontRightDoor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 50 )
 collision_layer = 7
 collision_mask = 7
 
 [node name="RightDoor" type="MeshInstance" parent="FrontRightDoor"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 6, 0, 50 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 mesh = SubResource( 7 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="FrontRightDoor"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 6, 0, 50 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 shape = SubResource( 8 )
 
-[node name="BackLeftDoor" type="KinematicBody" parent="."]
+[node name="BackLeftDoor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -48.5 )
 
 [node name="BackLeftDoor" type="MeshInstance" parent="BackLeftDoor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -48.5 )
 mesh = SubResource( 9 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="BackLeftDoor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -48.5 )
 shape = SubResource( 10 )
 
-[node name="BackRightDoor" type="KinematicBody" parent="."]
+[node name="BackRightDoor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -48.5 )
 
 [node name="RightDoor_Back" type="MeshInstance" parent="BackRightDoor"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 6, 0, -48.5 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 mesh = SubResource( 11 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="BackRightDoor"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 6, 0, -48.5 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 shape = SubResource( 12 )
 
 [node name="RearWall" type="StaticBody" parent="."]
@@ -231,3 +233,5 @@ shape = SubResource( 14 )
 [node name="Right" type="CollisionShape" parent="FrontWall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 6, 0 )
 shape = SubResource( 14 )
+[connection signal="area_entered" from="FrontLeftDoor" to="FrontLeftDoor" method="_on_FrontLeftDoor_area_entered"]
+[connection signal="body_entered" from="FrontLeftDoor" to="FrontLeftDoor" method="_on_FrontLeftDoor_body_entered"]

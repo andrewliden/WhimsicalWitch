@@ -31,7 +31,15 @@ func is_hit_by(node):
 
 
 func _on_MagicMissile_body_entered(body):
-	if body.is_in_group("enemies"):
-		if body.has_method("is_hit_by"):
-			body.is_hit_by(self)
+	hit(body)
+	
+func hit(object):
+	if object.is_in_group("enemies"):
+		if object.has_method("is_hit_by"):
+			object.is_hit_by(self)
 	destroy_self()
+
+
+func _on_MagicMissile_area_entered(area):
+	if !area.is_in_group("projectiles"):
+		destroy_self()

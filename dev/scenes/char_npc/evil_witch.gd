@@ -44,7 +44,7 @@ func attack_check():
 func movement(delta):
 	var motion = Vector3(0,0,0)
 	if dist <= WALK_DIST:
-		motion = transform.basis.z * SPEED
+		motion = global_transform.basis.z * SPEED
 	motion += GRAVITY
 	return move_and_collide(motion * delta)
 
