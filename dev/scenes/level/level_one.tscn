@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/level/scene_objects/city_hall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/level/scene_objects/archway.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/char_npc/evil_witch.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ent/powerup_spell.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/ent/health_potion_pickup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/char_npc/flying_eye.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/char_npc/jiangshi.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -29,6 +31,24 @@ _data = {
 _data = {
 "points": PoolVector3Array( -50.6192, 17.0216, 0.258453, 50.6192, -17.0216, -0.258453, -5.90211, -0.000968933, 1.87106, -30.8406, -9.39729, -7.41254, 30.8406, 9.39729, 7.41254, 187.834, 5.01693, -3.03262 ),
 "tilts": PoolRealArray( 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -80.8702, 1.52588e-05, 52.4135, 6.58762, 9.15527e-05, 52.546, -6.58762, -9.15527e-05, -52.546, 38.8723, -13.065, -64.4033, 0, 0, 0, 0, 0, 0, -53.1479, -26.5917, -171.5 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=6]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 93.8606, 1.52588e-05, 42.4038, 10.0969, 0.000473022, 35.9, -10.0969, -0.000473022, -35.9, -79.2819, 0.000488281, -64.174, 0, 0, 0, 0, 0, 0, -101.035, -1.52588e-05, -172.066 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=7]
+_data = {
+"points": PoolVector3Array( 6.74965, 9.11967, 1.95389, -6.74965, -9.11967, -1.95389, 0.242001, -3.76215, 1.88226, -5.27451, -7.87163, -2.37393, 5.27451, 7.87163, 2.37393, 13.0695, -11.8384, -1.16876, 5.40716, 7.89172, 1.95389, -5.40716, -7.89172, -1.95389, 0.242, -3.57369, 1.88226 ),
+"tilts": PoolRealArray( 0, 0, 0 )
 }
 
 [sub_resource type="BoxShape" id=4]
@@ -133,22 +153,135 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
 [node name="ghost3" parent="Enemies/Stationary Ghosts" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
 
-[node name="EvilWitches" type="Spatial" parent="Enemies"]
+[node name="ArchwayEvilWitches" type="Spatial" parent="Enemies"]
 transform = Transform( -0.994403, 0, -0.105656, 0, 1, 0, 0.105656, 0, -0.994403, -12.1035, 31.0979, 0 )
 
-[node name="evil_witch" parent="Enemies/EvilWitches" instance=ExtResource( 9 )]
+[node name="evil_witch" parent="Enemies/ArchwayEvilWitches" instance=ExtResource( 9 )]
 
-[node name="evil_witch2" parent="Enemies/EvilWitches" instance=ExtResource( 9 )]
+[node name="evil_witch2" parent="Enemies/ArchwayEvilWitches" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115664, 1.05683, 15.5166 )
 
-[node name="evil_witch3" parent="Enemies/EvilWitches" instance=ExtResource( 9 )]
+[node name="evil_witch3" parent="Enemies/ArchwayEvilWitches" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279608, 1.05683, 31.4072 )
 
-[node name="evil_witch" parent="Enemies" instance=ExtResource( 9 )]
-transform = Transform( -0.916684, 0, -0.399613, 0, 1, 0, 0.399613, 0, -0.916684, -19.3687, 8.12841, -225.293 )
+[node name="Archbats" type="Path" parent="Enemies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -79.2277, 52.6662, 67.4572 )
+curve = SubResource( 5 )
 
-[node name="evil_witch2" parent="Enemies" instance=ExtResource( 9 )]
-transform = Transform( -0.952646, 0, 0.304083, 0, 1, 0, -0.304083, 0, -0.952646, -81.3376, 14.8171, -175.716 )
+[node name="FrontBat" type="PathFollow" parent="Enemies/Archbats"]
+transform = Transform( -0.729357, 0.0725156, 0.68028, 0.0291243, 0.996756, -0.0750256, -0.683514, -0.0349077, -0.729102, 16.5448, -10.3126, -16.6705 )
+offset = 120.0
+rotation_mode = 4
+
+[node name="flying_eye" parent="Enemies/Archbats/FrontBat" instance=ExtResource( 12 )]
+
+[node name="LeftBat" type="PathFollow" parent="Enemies/Archbats"]
+transform = Transform( -0.691928, 0.0737605, 0.718189, 0.0250211, 0.99662, -0.0782501, -0.721533, -0.0361735, -0.691434, -0.64509, -9.19103, -20.5969 )
+offset = 110.0
+h_offset = 15.0
+rotation_mode = 4
+
+[node name="flying_eye" parent="Enemies/Archbats/LeftBat" instance=ExtResource( 12 )]
+
+[node name="RightBat" type="PathFollow" parent="Enemies/Archbats"]
+transform = Transform( -0.691928, 0.0737605, 0.718189, 0.0250211, 0.99662, -0.0782501, -0.721533, -0.0361735, -0.691434, 20.1127, -9.94166, 1.04914 )
+offset = 110.0
+h_offset = -15.0
+rotation_mode = 4
+
+[node name="flying_eye" parent="Enemies/Archbats/RightBat" instance=ExtResource( 12 )]
+
+[node name="RoadBats" type="Path" parent="Enemies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4597, 44.2692, 119.886 )
+curve = SubResource( 6 )
+
+[node name="FrontBat" type="PathFollow" parent="Enemies/RoadBats"]
+transform = Transform( -0.492913, 2.91482e-06, -0.870078, 4.48366e-07, 1, 3.09605e-06, 0.870079, 1.13597e-06, -0.492913, -11.3609, 0.000516941, -9.66258 )
+offset = 120.0
+rotation_mode = 4
+
+[node name="flying_eye" parent="Enemies/RoadBats/FrontBat" instance=ExtResource( 12 )]
+
+[node name="LeftBat" type="PathFollow" parent="Enemies/RoadBats"]
+transform = Transform( -0.481797, 3.14589e-06, -0.876282, 4.07094e-07, 1, 3.36621e-06, 0.876283, 1.2651e-06, -0.481797, -10.0677, 0.000491469, 8.23403 )
+offset = 110.0
+h_offset = 15.0
+rotation_mode = 4
+
+[node name="flying_eye" parent="Enemies/RoadBats/LeftBat" instance=ExtResource( 12 )]
+
+[node name="RightBat" type="PathFollow" parent="Enemies/RoadBats"]
+transform = Transform( -0.481797, 3.14589e-06, -0.876282, 4.07094e-07, 1, 3.36621e-06, 0.876283, 1.2651e-06, -0.481797, 4.38625, 0.000479257, -18.0545 )
+offset = 110.0
+h_offset = -15.0
+rotation_mode = 4
+
+[node name="flying_eye" parent="Enemies/RoadBats/RightBat" instance=ExtResource( 12 )]
+
+[node name="StartWitches" type="Spatial" parent="Enemies"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -31.888, 12.2605, -204.934 )
+
+[node name="evil_witch" parent="Enemies/StartWitches" instance=ExtResource( 9 )]
+transform = Transform( 0.916684, 0, 0.399613, 0, 1, 0, -0.399613, 0, 0.916684, -12.5193, -4.13205, 20.3593 )
+
+[node name="evil_witch2" parent="Enemies/StartWitches" instance=ExtResource( 9 )]
+transform = Transform( 0.952645, 0, -0.304083, 0, 1, 0, 0.304083, 0, 0.952645, 24.3333, 3.70958, -29.2178 )
+
+[node name="evil_witch3" parent="Enemies/StartWitches" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8703, 2.30903, -9.82248 )
+
+[node name="Jiangshi" type="Spatial" parent="Enemies"]
+transform = Transform( -0.982619, 0, 0.185632, 0, 1, 0, -0.185632, 0, -0.982619, -20.8736, 38.7119, 252.962 )
+
+[node name="Center" parent="Enemies/Jiangshi" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="RightMid" parent="Enemies/Jiangshi" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -15 )
+
+[node name="LeftMid" parent="Enemies/Jiangshi" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -15 )
+
+[node name="GhostsAndPotion" type="Spatial" parent="Enemies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.90421, 10.3622, -344.356 )
+
+[node name="potion" parent="Enemies/GhostsAndPotion" instance=ExtResource( 11 )]
+
+[node name="GhostCircle" type="Path" parent="Enemies/GhostsAndPotion"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75794, 7.9262, 0 )
+curve = SubResource( 7 )
+
+[node name="FirstGhost" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
+transform = Transform( 0.999536, -0.0292572, -0.00845435, 0.0292316, 0.999568, -0.00314062, 0.00854258, 0.00289203, 0.999959, 0.012416, -4.08312, 1.81267 )
+offset = 0.4
+rotation_mode = 0
+
+[node name="ghost" parent="Enemies/GhostsAndPotion/GhostCircle/FirstGhost" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+
+[node name="2ndGhost" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7963, -13.9687, -1.17863 )
+offset = 12.2456
+rotation_mode = 0
+
+[node name="ghost" parent="Enemies/GhostsAndPotion/GhostCircle/2ndGhost" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+
+[node name="3rdGhost" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7288, -12.3108, -1.30942 )
+offset = 24.4912
+rotation_mode = 0
+
+[node name="ghost" parent="Enemies/GhostsAndPotion/GhostCircle/3rdGhost" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+
+[node name="PathFollow" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9674, -2.00214, 1.90892 )
+offset = 36.7368
+rotation_mode = 0
+
+[node name="ghost" parent="Enemies/GhostsAndPotion/GhostCircle/PathFollow" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="EndOfLevel" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.5409, 470.395 )

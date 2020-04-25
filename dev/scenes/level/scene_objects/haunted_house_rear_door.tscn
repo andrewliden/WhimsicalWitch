@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/models_materials/levels/level_one/env/Floor.material" type="Material" id=1]
 [ext_resource path="res://assets/models_materials/levels/level_one/env/WallMaterial.material" type="Material" id=2]
@@ -7,7 +7,10 @@
 [ext_resource path="res://assets/models_materials/levels/level_one/env/DoorWood_001.material" type="Material" id=5]
 [ext_resource path="res://assets/models_materials/levels/level_one/env/Roof.material" type="Material" id=6]
 [ext_resource path="res://assets/models_materials/levels/level_one/env/DoorWood.material" type="Material" id=7]
-[ext_resource path="res://scenes/level/scene_objects/onhit_rotate.gd" type="Script" id=8]
+[ext_resource path="res://scenes/level/scene_objects/FrontLeftDoor.gd" type="Script" id=8]
+[ext_resource path="res://scenes/level/scene_objects/FrontRightDoor.gd" type="Script" id=9]
+[ext_resource path="res://scenes/level/scene_objects/BackLeftDoor.gd" type="Script" id=10]
+[ext_resource path="res://scenes/level/scene_objects/BackRightDoor.gd" type="Script" id=11]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "House"
@@ -131,6 +134,9 @@ extents = Vector3( 50, 13.5, 0.5 )
 [sub_resource type="BoxShape" id=14]
 extents = Vector3( 22, 7, 0.5 )
 
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 6, 6.5, 1.2 )
+
 [node name="haunted_house_rear_door" type="StaticBody"]
 
 [node name="House" type="MeshInstance" parent="."]
@@ -155,7 +161,7 @@ shape = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.5, 20, 0 )
 shape = SubResource( 4 )
 
-[node name="FrontLeftDoor" type="Area" parent="."]
+[node name="FrontLeftDoor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 50 )
 collision_layer = 7
 collision_mask = 7
@@ -172,6 +178,7 @@ shape = SubResource( 6 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 50 )
 collision_layer = 7
 collision_mask = 7
+script = ExtResource( 9 )
 
 [node name="RightDoor" type="MeshInstance" parent="FrontRightDoor"]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
@@ -184,6 +191,7 @@ shape = SubResource( 8 )
 
 [node name="BackLeftDoor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -48.5 )
+script = ExtResource( 10 )
 
 [node name="BackLeftDoor" type="MeshInstance" parent="BackLeftDoor"]
 mesh = SubResource( 9 )
@@ -194,6 +202,7 @@ shape = SubResource( 10 )
 
 [node name="BackRightDoor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -48.5 )
+script = ExtResource( 11 )
 
 [node name="RightDoor_Back" type="MeshInstance" parent="BackRightDoor"]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
@@ -233,5 +242,27 @@ shape = SubResource( 14 )
 [node name="Right" type="CollisionShape" parent="FrontWall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 6, 0 )
 shape = SubResource( 14 )
-[connection signal="area_entered" from="FrontLeftDoor" to="FrontLeftDoor" method="_on_FrontLeftDoor_area_entered"]
-[connection signal="body_entered" from="FrontLeftDoor" to="FrontLeftDoor" method="_on_FrontLeftDoor_body_entered"]
+
+[node name="FrontDoorway" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 49.5 )
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontDoorway"]
+shape = SubResource( 15 )
+
+[node name="BackDoorway" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, -49 )
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape" type="CollisionShape" parent="BackDoorway"]
+shape = SubResource( 15 )
+[connection signal="area_entered" from="FrontDoorway" to="FrontLeftDoor" method="_on_FrontDoorway_area_entered"]
+[connection signal="area_entered" from="FrontDoorway" to="FrontRightDoor" method="_on_FrontDoorway_area_entered"]
+[connection signal="body_entered" from="FrontDoorway" to="FrontLeftDoor" method="_on_FrontDoorway_body_entered"]
+[connection signal="body_entered" from="FrontDoorway" to="FrontRightDoor" method="_on_FrontDoorway_body_entered"]
+[connection signal="area_entered" from="BackDoorway" to="BackLeftDoor" method="_on_BackDoorway_area_entered"]
+[connection signal="area_entered" from="BackDoorway" to="BackRightDoor" method="_on_BackDoorway_area_entered"]
+[connection signal="body_entered" from="BackDoorway" to="BackLeftDoor" method="_on_BackDoorway_body_entered"]
+[connection signal="body_entered" from="BackDoorway" to="BackRightDoor" method="_on_BackDoorway_body_entered"]

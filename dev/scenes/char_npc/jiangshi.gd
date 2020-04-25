@@ -37,7 +37,8 @@ func floorCheck():
 func hop():
 	if floorCheck() and !dead:
 		var jumpPower = rand_range(10,25)
-		var jumpForce = Vector3(0,jumpPower,-jumpPower)
+		var jumpForce = global_transform.basis.z * jumpPower
+		jumpForce += global_transform.basis.y * jumpPower
 		apply_impulse(Vector3(0,0,0),jumpForce)
 		$AnimationPlayer.queue("JumpStart")
 		$AnimationPlayer.play()
