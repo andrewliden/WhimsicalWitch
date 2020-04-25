@@ -33,25 +33,25 @@ _data = {
 "tilts": PoolRealArray( 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=5]
+[sub_resource type="Curve3D" id=4]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -80.8702, 1.52588e-05, 52.4135, 6.58762, 9.15527e-05, 52.546, -6.58762, -9.15527e-05, -52.546, 38.8723, -13.065, -64.4033, 0, 0, 0, 0, 0, 0, -53.1479, -26.5917, -171.5 ),
 "tilts": PoolRealArray( 0, 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=6]
+[sub_resource type="Curve3D" id=5]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 93.8606, 1.52588e-05, 42.4038, 10.0969, 0.000473022, 35.9, -10.0969, -0.000473022, -35.9, -79.2819, 0.000488281, -64.174, 0, 0, 0, 0, 0, 0, -101.035, -1.52588e-05, -172.066 ),
 "tilts": PoolRealArray( 0, 0, 0 )
 }
 
-[sub_resource type="Curve3D" id=7]
+[sub_resource type="Curve3D" id=6]
 _data = {
 "points": PoolVector3Array( 6.74965, 9.11967, 1.95389, -6.74965, -9.11967, -1.95389, 0.242001, -3.76215, 1.88226, -5.27451, -7.87163, -2.37393, 5.27451, 7.87163, 2.37393, 13.0695, -11.8384, -1.16876, 5.40716, 7.89172, 1.95389, -5.40716, -7.89172, -1.95389, 0.242, -3.57369, 1.88226 ),
 "tilts": PoolRealArray( 0, 0, 0 )
 }
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 150, 41.086, 3.62963 )
 
 [node name="Spatial" type="Spatial"]
@@ -97,21 +97,21 @@ transform = Transform( 0.908872, 0, 0.417074, 0, 1, 0, -0.417074, 0, 0.908872, -
 curve = SubResource( 3 )
 
 [node name="FrontGhost" type="PathFollow" parent="Enemies/StartGhosts"]
-transform = Transform( -0.0385883, 0.169746, 0.984731, 0.00846869, 0.985486, -0.169544, -0.999219, 0.00179697, -0.0394657, 13.1448, -4.6363, 1.38734 )
+transform = Transform( -0.0385892, 0.169746, 0.984731, 0.00846885, 0.985486, -0.169544, -0.999219, 0.00179699, -0.0394667, 13.1448, -4.63629, 1.38733 )
 offset = 20.0
 rotation_mode = 4
 
 [node name="ghost" parent="Enemies/StartGhosts/FrontGhost" instance=ExtResource( 7 )]
 
 [node name="MiddleGhost" type="PathFollow" parent="Enemies/StartGhosts"]
-transform = Transform( -0.0252335, 0.232265, 0.972323, 0.00571117, 0.972652, -0.232195, -0.999665, -0.000305972, -0.0258698, 3.42581, -2.65204, 1.71508 )
+transform = Transform( -0.02523, 0.232264, 0.972323, 0.00571034, 0.972652, -0.232194, -0.999665, -0.00030596, -0.0258663, 3.42581, -2.65204, 1.71508 )
 offset = 10.0
 rotation_mode = 4
 
 [node name="ghost" parent="Enemies/StartGhosts/MiddleGhost" instance=ExtResource( 7 )]
 
 [node name="BackGhost" type="PathFollow" parent="Enemies/StartGhosts"]
-transform = Transform( -0.00559158, 0.316815, 0.94847, 6.65827e-05, 0.948485, -0.31682, -0.999984, -0.00170837, -0.00532462, -5.81721, -0.029441, 1.87061 )
+transform = Transform( -0.00559266, 0.316816, 0.94847, 6.69445e-05, 0.948485, -0.31682, -0.999984, -0.00170837, -0.00532576, -5.81721, -0.029441, 1.87061 )
 offset = 0.1
 rotation_mode = 4
 
@@ -122,21 +122,21 @@ transform = Transform( -0.847854, 0, 0.53023, 0, 1, 0, -0.53023, 0, -0.847854, 7
 curve = SubResource( 3 )
 
 [node name="FrontGhost" type="PathFollow" parent="Enemies/OtherStartGhosts"]
-transform = Transform( -0.0385883, 0.169746, 0.984731, 0.00846869, 0.985486, -0.169544, -0.999219, 0.00179697, -0.0394657, 13.1448, -4.6363, 1.38734 )
+transform = Transform( -0.0385892, 0.169746, 0.984731, 0.00846885, 0.985486, -0.169544, -0.999219, 0.00179699, -0.0394667, 13.1448, -4.63629, 1.38733 )
 offset = 20.0
 rotation_mode = 4
 
 [node name="ghost" parent="Enemies/OtherStartGhosts/FrontGhost" instance=ExtResource( 7 )]
 
 [node name="MiddleGhost" type="PathFollow" parent="Enemies/OtherStartGhosts"]
-transform = Transform( -0.0252335, 0.232265, 0.972323, 0.00571117, 0.972652, -0.232195, -0.999665, -0.000305972, -0.0258698, 3.42581, -2.65204, 1.71508 )
+transform = Transform( -0.02523, 0.232264, 0.972323, 0.00571034, 0.972652, -0.232194, -0.999665, -0.00030596, -0.0258663, 3.42581, -2.65204, 1.71508 )
 offset = 10.0
 rotation_mode = 4
 
 [node name="ghost" parent="Enemies/OtherStartGhosts/MiddleGhost" instance=ExtResource( 7 )]
 
 [node name="BackGhost" type="PathFollow" parent="Enemies/OtherStartGhosts"]
-transform = Transform( -0.00559158, 0.316815, 0.94847, 6.65827e-05, 0.948485, -0.31682, -0.999984, -0.00170837, -0.00532463, -5.81721, -0.029441, 1.87061 )
+transform = Transform( -0.00559266, 0.316816, 0.94847, 6.69445e-05, 0.948485, -0.31682, -0.999984, -0.00170837, -0.00532576, -5.81721, -0.029441, 1.87061 )
 offset = 0.1
 rotation_mode = 4
 
@@ -166,17 +166,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279608, 1.05683, 31.4072 )
 
 [node name="Archbats" type="Path" parent="Enemies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -79.2277, 52.6662, 67.4572 )
-curve = SubResource( 5 )
+curve = SubResource( 4 )
 
 [node name="FrontBat" type="PathFollow" parent="Enemies/Archbats"]
-transform = Transform( -0.729357, 0.0725156, 0.68028, 0.0291243, 0.996756, -0.0750256, -0.683514, -0.0349077, -0.729102, 16.5448, -10.3126, -16.6705 )
+transform = Transform( -0.729343, 0.0725077, 0.680296, 0.0291227, 0.996757, -0.0750147, -0.683529, -0.0348994, -0.729089, 16.5448, -10.3125, -16.6705 )
 offset = 120.0
 rotation_mode = 4
 
 [node name="flying_eye" parent="Enemies/Archbats/FrontBat" instance=ExtResource( 12 )]
 
 [node name="LeftBat" type="PathFollow" parent="Enemies/Archbats"]
-transform = Transform( -0.691928, 0.0737605, 0.718189, 0.0250211, 0.99662, -0.0782501, -0.721533, -0.0361735, -0.691434, -0.64509, -9.19103, -20.5969 )
+transform = Transform( -0.691911, 0.0737639, 0.718204, 0.0250193, 0.99662, -0.0782554, -0.721549, -0.0361768, -0.691417, -0.644805, -9.19103, -20.5971 )
 offset = 110.0
 h_offset = 15.0
 rotation_mode = 4
@@ -184,7 +184,7 @@ rotation_mode = 4
 [node name="flying_eye" parent="Enemies/Archbats/LeftBat" instance=ExtResource( 12 )]
 
 [node name="RightBat" type="PathFollow" parent="Enemies/Archbats"]
-transform = Transform( -0.691928, 0.0737605, 0.718189, 0.0250211, 0.99662, -0.0782501, -0.721533, -0.0361735, -0.691434, 20.1127, -9.94166, 1.04914 )
+transform = Transform( -0.691911, 0.0737639, 0.718204, 0.0250193, 0.99662, -0.0782554, -0.721549, -0.0361768, -0.691417, 20.1125, -9.94161, 1.04937 )
 offset = 110.0
 h_offset = -15.0
 rotation_mode = 4
@@ -193,17 +193,17 @@ rotation_mode = 4
 
 [node name="RoadBats" type="Path" parent="Enemies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4597, 44.2692, 119.886 )
-curve = SubResource( 6 )
+curve = SubResource( 5 )
 
 [node name="FrontBat" type="PathFollow" parent="Enemies/RoadBats"]
-transform = Transform( -0.492913, 2.91482e-06, -0.870078, 4.48366e-07, 1, 3.09605e-06, 0.870079, 1.13597e-06, -0.492913, -11.3609, 0.000516941, -9.66258 )
+transform = Transform( -0.492912, 2.91518e-06, -0.870079, 4.47851e-07, 1, 3.09676e-06, 0.870079, 1.13676e-06, -0.492912, -11.3609, 0.00051694, -9.66255 )
 offset = 120.0
 rotation_mode = 4
 
 [node name="flying_eye" parent="Enemies/RoadBats/FrontBat" instance=ExtResource( 12 )]
 
 [node name="LeftBat" type="PathFollow" parent="Enemies/RoadBats"]
-transform = Transform( -0.481797, 3.14589e-06, -0.876282, 4.07094e-07, 1, 3.36621e-06, 0.876283, 1.2651e-06, -0.481797, -10.0677, 0.000491469, 8.23403 )
+transform = Transform( -0.481797, 3.14518e-06, -0.876282, 4.065e-07, 1, 3.36573e-06, 0.876283, 1.26539e-06, -0.481797, -10.0676, 0.00049146, 8.23406 )
 offset = 110.0
 h_offset = 15.0
 rotation_mode = 4
@@ -211,7 +211,7 @@ rotation_mode = 4
 [node name="flying_eye" parent="Enemies/RoadBats/LeftBat" instance=ExtResource( 12 )]
 
 [node name="RightBat" type="PathFollow" parent="Enemies/RoadBats"]
-transform = Transform( -0.481797, 3.14589e-06, -0.876282, 4.07094e-07, 1, 3.36621e-06, 0.876283, 1.2651e-06, -0.481797, 4.38625, 0.000479257, -18.0545 )
+transform = Transform( -0.481797, 3.14518e-06, -0.876282, 4.065e-07, 1, 3.36573e-06, 0.876283, 1.26539e-06, -0.481797, 4.38626, 0.000479265, -18.0544 )
 offset = 110.0
 h_offset = -15.0
 rotation_mode = 4
@@ -249,10 +249,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.90421, 10.3622, -344.356 )
 
 [node name="GhostCircle" type="Path" parent="Enemies/GhostsAndPotion"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75794, 7.9262, 0 )
-curve = SubResource( 7 )
+curve = SubResource( 6 )
 
 [node name="FirstGhost" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
-transform = Transform( 0.999536, -0.0292572, -0.00845435, 0.0292316, 0.999568, -0.00314062, 0.00854258, 0.00289203, 0.999959, 0.012416, -4.08312, 1.81267 )
+transform = Transform( 0.999536, -0.0292572, -0.00845435, 0.0292316, 0.999568, -0.00314062, 0.00854258, 0.00289203, 0.999959, 0.0124166, -4.08313, 1.81266 )
 offset = 0.4
 rotation_mode = 0
 
@@ -260,7 +260,7 @@ rotation_mode = 0
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="2ndGhost" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7963, -13.9687, -1.17863 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7963, -13.9687, -1.17864 )
 offset = 12.2456
 rotation_mode = 0
 
@@ -268,7 +268,7 @@ rotation_mode = 0
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="3rdGhost" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7288, -12.3108, -1.30942 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7288, -12.3107, -1.30941 )
 offset = 24.4912
 rotation_mode = 0
 
@@ -276,7 +276,7 @@ rotation_mode = 0
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="PathFollow" type="PathFollow" parent="Enemies/GhostsAndPotion/GhostCircle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9674, -2.00214, 1.90892 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9673, -2.0021, 1.90893 )
 offset = 36.7368
 rotation_mode = 0
 
@@ -288,7 +288,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.5409, 470.395 )
 script = ExtResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="EndOfLevel"]
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 
 [node name="PowerUps" type="Spatial" parent="."]
 
