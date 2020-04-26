@@ -52,3 +52,21 @@ Try to reach the end without losing all of your health, and while getting as man
 * __D__ Tilts your character to the right, making rightwards movement slightly faster, and leftwards movement slightly slower.
 * __Double tapping A or D__ starts a barrel roll.  While doing a barrel roll, projectiles bounce off the player.  Your mouse movement also moves your player more.
 * __Escape__ unlocks the mouse, allowing you to close the game.
+
+### Obstacles
+The player takes damage if they hit terrain or an enemy.  The following enemies will be present
+* __Ghosts__ will fly around, possibly hitting the player.
+* __Evil Witches__ march forwards while firing projectiles at the player.
+* __Jiangshi__ hop towards the player
+* __Flying Eyeballs__ fly around while shooting projectiles at the player.
+* __Ents__ take up a lot of space and move around, potentially running into the player.
+
+### Power ups
+* __Health potions__ are red bottles that increase your health when touched.
+* __Spellbooks__ modify your left-click spell to fire more projectiles.
+
+## What I learned from this project
+Updating the camera system for this game was probably the most dramatic change in this project.  It required thinking about space from many different reference points.  The player needed to always face forward, but be allowed to tilt slightly when the mouse is moved.  The problem, though, is that allowing the mouse to tilt the player changes the player's forward direction.  To solve this, tilting was applied to a node that was a child of another spatial node.  The parent node would still be usable to find the correct forward direction.  Angle correction was done in a way similar to the previous project, using dot products.
+The 2-D shaders used in the title screen also helped me gain an understanding of the lower-level workings of a game.  I experimented with making the text "wavy" using the vertex shader, but found I wanted finer-detail control.  I created a fragment shader that changes the color for each pixel to the color of the pixel that's slightly to the right or left of the one that would have been used before.  It was a nice looking effect, and I could see it being useful for making objects distort as if they're underwater.  I've seen similar effects used for that purpose in games I've played previously, and it's interesting to see the low-level workings of this seemingly simple functionality.
+Additionally, I further refined my understanding of modeling and animation in the 3-D space.  All models, textures, and animations for this project are original, and I'm happy with what I've achieved with them.
+Certainly, this isn't an exhaustive list of what I've learned from this project, but it's what comes to mind first.  It was enjoyable to make, and I feel like I've learned a lot.  Most of all, I hope it's fun.
