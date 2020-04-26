@@ -27,4 +27,6 @@ func _on_MagicMissile_body_entered(body):
 			deflect()
 		else:
 			body.damage_player()
-	is_hit_by(body)
+			is_hit_by(body)
+	else:
+		is_hit_by(body)

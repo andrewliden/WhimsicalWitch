@@ -1,0 +1,179 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://cloud_move.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/clouds.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/whimsical_text.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/Witch_text.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/GILSANUB.TTF" type="DynamicFontData" id=5]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0, 0, 0, 1, 0.178986, 0.202988, 0.398438, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+//Constants used for the vertex shader
+const float v_move_amount = 30.0;
+const float waviness = 30.0;
+
+//Constants used for the fragment shader
+const float move_amount = 2.0;
+const float frequency = 3.0;
+const float phase_modifier = 0.05;
+
+void vertex(){
+	VERTEX.x = VERTEX.x + sin((TIME + VERTEX.y * waviness)) * v_move_amount;
+}
+
+void fragment(){
+	//Some help on this from here:
+	//https://godotengine.org/qa/28151/how-to-check-color-of-adjacent-pixels-in-fragment-shader
+	vec2 pixelSize = 1.0 / vec2(textureSize(TEXTURE, 0 ));
+	//Get the pixel that's a given offset away from the one you would have otherwise used.
+	float offsetX = sin((TIME + FRAGCOORD.y * phase_modifier) * frequency) * move_amount;
+	vec4 newColor = texture(TEXTURE, UV + vec2(offsetX, 0) * pixelSize, 0);
+	COLOR = newColor;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+const float scale_amount = 20.0;
+const float frequency = 3.0;
+
+void vertex(){
+	VERTEX.y = VERTEX.y + sin(TIME * frequency) * (UV.y - 0.5) * scale_amount;
+	VERTEX.x = VERTEX.x + sin(TIME * frequency) * (UV.x - 0.5) * scale_amount;
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sky_backdrop" type="Sprite" parent="."]
+position = Vector2( 509.993, 302.062 )
+rotation = 1.5708
+scale = Vector2( 0.310289, 1047.12 )
+texture = SubResource( 3 )
+
+[node name="Clouds" type="Node2D" parent="."]
+
+[node name="CloudGroup" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.223529 )
+material = SubResource( 4 )
+position = Vector2( 0.3815, 46.637 )
+scale = Vector2( 1, 0.690188 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, -1.90615 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup2" type="Sprite" parent="Clouds"]
+self_modulate = Color( 1, 1, 1, 0.607843 )
+material = SubResource( 4 )
+position = Vector2( -787.231, 99.5567 )
+scale = Vector2( 1, 0.82687 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, 0 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup3" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.560784 )
+material = SubResource( 4 )
+position = Vector2( -19.583, 135.023 )
+scale = Vector2( 1, 1.33715 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, -0.88237 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup4" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.407843 )
+material = SubResource( 4 )
+position = Vector2( -638.684, 261.679 )
+scale = Vector2( 1, 1.62874 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, 0 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup7" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.67451 )
+material = SubResource( 4 )
+position = Vector2( 145.133, 321.973 )
+scale = Vector2( 1, 1.62874 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, 0 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup9" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.67451 )
+material = SubResource( 4 )
+position = Vector2( -1002.25, 333.661 )
+scale = Vector2( 1, 1.62874 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, 0 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup5" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.760784 )
+material = SubResource( 4 )
+position = Vector2( -463.377, 413.962 )
+scale = Vector2( 1, 1.54179 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, 1.52588e-05 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup6" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.760784 )
+material = SubResource( 4 )
+position = Vector2( 100.939, 491.439 )
+scale = Vector2( 1, 1.45502 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, 1.52588e-05 )
+script = ExtResource( 1 )
+
+[node name="CloudGroup8" type="Sprite" parent="Clouds"]
+modulate = Color( 1, 1, 1, 0.760784 )
+material = SubResource( 4 )
+position = Vector2( -982.159, 518.711 )
+scale = Vector2( 1, 1.45502 )
+texture = ExtResource( 2 )
+offset = Vector2( 512, 1.52588e-05 )
+script = ExtResource( 1 )
+
+[node name="Whimsical_text" type="Sprite" parent="."]
+material = SubResource( 6 )
+position = Vector2( 318.09, 123.736 )
+rotation = -0.15708
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 8 )
+position = Vector2( 500.858, 304.626 )
+scale = Vector2( 1.52104, 1.58819 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 646.582
+margin_top = 551.95
+margin_right = 1010.58
+margin_bottom = 592.95
+custom_fonts/font = SubResource( 9 )
+text = "Left Click to start!"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

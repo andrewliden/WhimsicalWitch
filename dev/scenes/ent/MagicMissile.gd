@@ -41,5 +41,4 @@ func hit(object):
 
 
 func _on_MagicMissile_area_entered(area):
-	if !area.is_in_group("projectiles"):
-		destroy_self()
+	pass
