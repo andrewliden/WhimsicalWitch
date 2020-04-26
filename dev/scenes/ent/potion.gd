@@ -13,7 +13,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	#the potion will explode if the user right clicks again, or it hits an object
 	if Input.is_action_just_pressed("gameplay_alt_fire"):
 		explode()

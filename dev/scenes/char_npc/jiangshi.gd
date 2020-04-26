@@ -16,7 +16,7 @@ func _ready():
 func getPlayerPos():
 	playerGlobalPosition = player.global_transform.origin
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if playerDetected:
 		getPlayerPos()
 		if $JumpTimer.is_stopped():

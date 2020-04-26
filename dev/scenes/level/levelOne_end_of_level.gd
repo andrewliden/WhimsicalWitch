@@ -18,4 +18,4 @@ func _ready():
 
 func _on_EndOfLevel_body_entered(body):
 	if(body.is_in_group("player")):
-		get_tree().change_scene("res://scenes/control/win.tscn")
+		var _err = get_tree().change_scene("res://scenes/control/win.tscn")

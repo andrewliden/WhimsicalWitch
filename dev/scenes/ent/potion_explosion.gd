@@ -1,7 +1,7 @@
 extends Area
 
 const MAX_SCALE = 40
-const MIN_SCALE = 0
+const MIN_SCALE = 0.01
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,12 +20,12 @@ func _process(_delta):
 func grow():
 	var timerPercent = 1 - $GrowTime.time_left / $GrowTime.wait_time
 	var targetScale = smoothstep(0, 1, timerPercent) * MAX_SCALE
-	scale = Vector3(1, 1, 1) * targetScale
+	set_scale( Vector3(1, 1, 1) * targetScale )
 
 func shrink():
 	var timerPercent = 1 - $ShrinkTime.time_left / $ShrinkTime.wait_time
 	var targetScale = smoothstep(1, 0, timerPercent) * MAX_SCALE
-	scale = Vector3(1, 1, 1) * targetScale
+	set_scale(Vector3(1, 1, 1) * targetScale )
 
 func _on_GrowTime_timeout():
 	$ShrinkTime.start()

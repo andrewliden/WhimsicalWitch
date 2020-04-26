@@ -26,7 +26,7 @@ func destroy_self():
 	explosionInstance.global_transform.origin = self.global_transform.origin
 	queue_free()
 	
-func is_hit_by(node):
+func is_hit_by(_node):
 	destroy_self()
 
 
@@ -38,7 +38,3 @@ func hit(object):
 		if object.has_method("is_hit_by"):
 			object.is_hit_by(self)
 	destroy_self()
-
-
-func _on_MagicMissile_area_entered(area):
-	pass

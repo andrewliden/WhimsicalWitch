@@ -169,7 +169,7 @@ tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = PoolRealArray( 0, 1, -6.96713, 12.765, -1.00596, 0.100343, 0.665207, -0.111383, 0.731454, 1, 1, 1, 0.3, 1, -6.8292, 12.232, -1.00596, -0.0409109, 0.671487, 0.0439616, 0.738579, 1, 1, 1, 0.8, 1, -7.36557, 10.5779, -1.00596, -0.190661, 0.645149, 0.2087, 0.709842, 1, 1, 1, 1.2, 1, -7.18167, 11.4916, -1.00596, -0.0767627, 0.668338, 0.083397, 0.735171, 1, 1, 1, 1.5, 1, -7.04375, 12.4045, -1.00596, 0.0614336, 0.669921, -0.0685966, 0.736699, 1, 1, 1, 1.7, 1, -6.9518, 13.0551, -1.00596, 0.0614887, 0.669916, -0.0686572, 0.736694, 1, 1, 1 )
 
-[sub_resource type="CylinderShape" id=9]
+[sub_resource type="CylinderShape" id=4]
 radius = 5.57681
 height = 8.92231
 
@@ -272,7 +272,7 @@ anims/Walk001 = SubResource( 3 )
 
 [node name="MidCollision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.44625, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 4 )
 
 [node name="TopCollision" type="CollisionShape" parent="."]
 transform = Transform( 0.989402, -0.145203, 0, 0.145203, 0.989402, 0, 0, 0, 1, 0, 13.1032, 0 )

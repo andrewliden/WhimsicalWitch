@@ -39,7 +39,7 @@ func attack_check():
 		if localPlayerPos.z > 0:
 			#Figure out how far away the target is.
 			if dist <= ATTACK_DIST:
-				attack(dist)
+				attack()
 
 func movement(delta):
 	var motion = Vector3(0,0,0)
@@ -48,7 +48,7 @@ func movement(delta):
 	motion += GRAVITY
 	return move_and_collide(motion * delta)
 
-func attack(dist):
+func attack():
 	var targetPos = playerPos + playerFwd * PREDICT_AMOUNT
 	$SpellSource.look_at(targetPos, Vector3(0,1,0))
 	var spellInstance = spell.instance()

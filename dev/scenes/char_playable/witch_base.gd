@@ -139,7 +139,7 @@ func collision_check():
 
 func lose_check():
 	if health <= 0:
-		get_tree().change_scene("res://scenes/control/GameOver.tscn")
+		var _err = get_tree().change_scene("res://scenes/control/GameOver.tscn")
 
 func check_mouse_unlock():
 	#This function checks for the ui cancel input.

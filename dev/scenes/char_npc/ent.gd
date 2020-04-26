@@ -16,11 +16,13 @@ func _physics_process(delta):
 	var lookIndicatorPos = $Path/PathFollow/Look.global_transform.origin
 	#I don't want the ent to care about looking upwards.
 	lookIndicatorPos.y = $ent.global_transform.origin.y
-	$ent.look_at(lookIndicatorPos, Vector3(0,1,0))
-	#By default, look_at seems to point opposite the way I want.
-	#Easily fixed, though.  Just rotate an additional pi radians.
-	$ent.rotate_y(PI)
 	var dist = $ent.global_transform.origin.distance_to(lookIndicatorPos)
+	if(dist > 0):
+		$ent.look_at(lookIndicatorPos, Vector3(0,1,0))
+		#By default, look_at seems to point opposite the way I want.
+		#Easily fixed, though.  Just rotate an additional pi radians.
+		$ent.rotate_y(PI)
+	
 	var motionVector = $ent.global_transform.basis.z * delta * dist * MOVESPEED
 	motionVector += GRAVITY * delta
 	$ent.move_and_collide(motionVector)

@@ -14,7 +14,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	motionVector = $witch_base.get_motion_vector()
 	apply_speed_buffs()
 	clamp_to_box()
