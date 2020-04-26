@@ -1,7 +1,8 @@
 extends Spatial
 
-const gravity = Vector3(0,-25,0)
-const moveSpeed = 25
+const GRAVITY = Vector3(0,-25,0)
+const MOVESPEED = 25
+const POINT_VALUE = 700
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,10 +21,11 @@ func _physics_process(delta):
 	#Easily fixed, though.  Just rotate an additional pi radians.
 	$ent.rotate_y(PI)
 	var dist = $ent.global_transform.origin.distance_to(lookIndicatorPos)
-	var motionVector = $ent.global_transform.basis.z * delta * dist * moveSpeed
-	motionVector += gravity * delta
+	var motionVector = $ent.global_transform.basis.z * delta * dist * MOVESPEED
+	motionVector += GRAVITY * delta
 	$ent.move_and_collide(motionVector)
 
 
 func _on_ent_tree_exited():
+	global.score += POINT_VALUE
 	queue_free()

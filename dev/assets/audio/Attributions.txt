@@ -6,3 +6,4 @@ laser6.ogg - kenny.nl
 
 throw.wav - original
 
+GDYN_Punching_Perc_PRO_SH - 9_edit.wav http://99sounds.org/fight-sound-effects/

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/models_materials/witch/Broom Texture.material" type="Material" id=1]
 [ext_resource path="res://assets/models_materials/witch/WitchHat.material" type="Material" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/textures/reticule.png" type="Texture" id=6]
 [ext_resource path="res://assets/textures/reticule_small.png" type="Texture" id=7]
 [ext_resource path="res://scenes/char_playable/SpellSource.gd" type="Script" id=8]
+[ext_resource path="res://assets/audio/GDYN_Punching_Perc_PRO_SH - 9_edit.wav" type="AudioStream" id=9]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Broom"
@@ -517,5 +518,10 @@ wait_time = 0.5
 
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="InjureSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 9 )
+unit_db = 15.0
+pitch_scale = 0.75
 [connection signal="timeout" from="SpinTimer" to="." method="_on_SpinTimer_timeout"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]

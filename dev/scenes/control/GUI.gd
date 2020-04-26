@@ -25,7 +25,14 @@ func set_boost(amount):
 	boostbar.value = amount
 
 func toggle_raspberry_jam(onoff):
-	$RaspberryJam.visible = onoff
+	if onoff:
+		if !$RaspberryJam.visible:
+			$RaspberryJamAnimations.queue("Injure_effect_fadeIn")
+			$RaspberryJamAnimations.play()
+	else:
+		if $RaspberryJam.visible:
+			$RaspberryJamAnimations.queue("Injure_effect_fadeOut")
+			$RaspberryJamAnimations.play()
 	
 func set_bombs(amount):
 	$BoostContainerMargin/BoostContainerGroup/BombsGroup/numBombsLabel.text = str(amount)

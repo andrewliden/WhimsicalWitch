@@ -157,6 +157,7 @@ func damage_player(amount = 10):
 	if !takingDamage:
 		takingDamage = true
 		$DamageTimer.start()
+		$InjureSound.play()
 		health -= amount
 
 func _on_SpinTimer_timeout():

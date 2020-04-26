@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GDYN_Punching_Perc_PRO_SH - 9_edit.wav-c951bbde35492fe0e788c62035d48fc2.sample"
+
+[deps]
+
+source_file="res://assets/audio/GDYN_Punching_Perc_PRO_SH - 9_edit.wav"
+dest_files=[ "res://.import/GDYN_Punching_Perc_PRO_SH - 9_edit.wav-c951bbde35492fe0e788c62035d48fc2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
