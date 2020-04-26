@@ -68,7 +68,11 @@ The player takes damage if they hit terrain or an enemy.  The following enemies 
 
 ## What I learned from this project
 Updating the camera system for this game was probably the most dramatic change in this project.  It required thinking about space from many different reference points.  The player needed to always face forward, but be allowed to tilt slightly when the mouse is moved.  The problem, though, is that allowing the mouse to tilt the player changes the player's forward direction.  To solve this, tilting was applied to a node that was a child of another spatial node.  The parent node would still be usable to find the correct forward direction.  Angle correction was done in a way similar to the previous project, using dot products.
+
 The 2-D shaders used in the title screen also helped me gain an understanding of the lower-level workings of a game.  I experimented with making the text "wavy" using the vertex shader, but found I wanted finer-detail control.  I created a fragment shader that changes the color for each pixel to the color of the pixel that's slightly to the right or left of the one that would have been used before.  It was a nice looking effect, and I could see it being useful for making objects distort as if they're underwater.  I've seen similar effects used for that purpose in games I've played previously, and it's interesting to see the low-level workings of this seemingly simple functionality.
+
 Additionally, I further refined my understanding of modeling and animation in the 3-D space.  All models, textures, and animations for this project are original, and I'm happy with what I've achieved with them.
-I also tried to use a better development workflow for this project than I used in the previous version.  I took more advanatage of git, and had a better organization to the file structure.
+
+I also tried to use a better development workflow for this project than I used in the previous version.  I took more advanatage of git, and had a better organization to the file structure.  I felt like this made development a bit smoother.
+
 Certainly, this isn't an exhaustive list of what I've learned from this project, but it's what comes to mind first.  It was enjoyable to make, and I feel like I've learned a lot.  Most of all, I hope it's fun.
