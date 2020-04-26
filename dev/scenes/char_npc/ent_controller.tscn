@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/char_npc/ent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/char_npc/ent.gd" type="Script" id=2]
+[ext_resource path="res://scenes/char_npc/ent_look.gd" type="Script" id=3]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 5.50613, 16.4868, 1.14459, 0, 0, 0, 0, 0, 0, -8.34506, 16.4827, 71.7615, 45.1197, 0, 5.06157, -45.1197, 0, -5.06157, -70.9262, 16.4827, 125.616, 3.53624, 0, 35.2654, -3.53624, 0, -35.2654, -60.253, 16.4827, 46.0599, -47.3317, 0, -1.97397, 47.3317, 0, 1.97397, -43.4881, 16.4827, -60.186, 0, 0, 0, 0, 0, 0, 5.50613, 16.4868, 1.14459 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="entSteering" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45715, 0 )
+script = ExtResource( 2 )
+
+[node name="ent" parent="." instance=ExtResource( 1 )]
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 1 )
+
+[node name="PathFollow" type="PathFollow" parent="Path"]
+
+[node name="Look" type="Position3D" parent="Path/PathFollow"]
+script = ExtResource( 3 )
+[connection signal="tree_exited" from="ent" to="." method="_on_ent_tree_exited"]

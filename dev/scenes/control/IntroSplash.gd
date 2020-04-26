@@ -1,4 +1,4 @@
-extends Area
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -12,10 +12,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_EndOfLevel_body_entered(body):
-	if(body.is_in_group("player")):
-		get_tree().change_scene("res://scenes/control/win.tscn")
+func _process(delta):
+	if Input.is_action_just_pressed("gameplay_fire"):
+		global.score = 0;
+		get_tree().change_scene("res://scenes/level/level_one.tscn")

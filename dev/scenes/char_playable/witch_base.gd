@@ -37,6 +37,7 @@ func _physics_process(delta):
 	point_forwards(delta)
 	collision_check()
 	check_mouse_unlock()
+	lose_check()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -135,7 +136,11 @@ func collision_check():
 				collider.is_hit_by(self)
 		else:
 			damage_player()
-		
+
+func lose_check():
+	if health <= 0:
+		get_tree().change_scene("res://scenes/control/GameOver.tscn")
+
 func check_mouse_unlock():
 	#This function checks for the ui cancel input.
 	#if it gets it, the mouse mode is toggled between visible and captured.

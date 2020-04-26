@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/textures/control/bad_end.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/game_over_text.png" type="Texture" id=2]
+[ext_resource path="res://assets/shaders/Wavy.tres" type="Material" id=3]
+[ext_resource path="res://assets/fonts/GILSANUB.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/control/Number.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Backdrop" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 3 )
+position = Vector2( 515.527, 262.429 )
+texture = ExtResource( 2 )
+
+[node name="Scoreboard" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.702
+anchor_bottom = 0.5
+margin_top = 340.0
+margin_right = 1024.0
+margin_bottom = 472.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Plaintext" type="Label" parent="Scoreboard"]
+margin_right = 1024.0
+margin_bottom = 51.0
+custom_fonts/font = SubResource( 1 )
+text = "Your score"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Number" type="Label" parent="Scoreboard"]
+margin_top = 55.0
+margin_right = 1024.0
+margin_bottom = 106.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+script = ExtResource( 5 )
+
+[node name="playAgainText" type="Label" parent="Scoreboard"]
+margin_top = 110.0
+margin_right = 1024.0
+margin_bottom = 161.0
+custom_fonts/font = SubResource( 3 )
+text = "Left click to play again!"
+align = 1

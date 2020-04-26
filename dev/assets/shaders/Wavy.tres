@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+//Constants used for the vertex shader
+const float v_move_amount = 30.0;
+const float waviness = 30.0;
+
+//Constants used for the fragment shader
+const float move_amount = 2.0;
+const float frequency = 3.0;
+const float phase_modifier = 0.05;
+
+void vertex(){
+	VERTEX.x = VERTEX.x + sin((TIME + VERTEX.y * waviness)) * v_move_amount;
+}
+
+void fragment(){
+	//Some help on this from here:
+	//https://godotengine.org/qa/28151/how-to-check-color-of-adjacent-pixels-in-fragment-shader
+	vec2 pixelSize = 1.0 / vec2(textureSize(TEXTURE, 0 ));
+	//Get the pixel that's a given offset away from the one you would have otherwise used.
+	float offsetX = sin((TIME + FRAGCOORD.y * phase_modifier) * frequency) * move_amount;
+	vec4 newColor = texture(TEXTURE, UV + vec2(offsetX, 0) * pixelSize, 0);
+	COLOR = newColor;
+}"
+
+[resource]
+shader = SubResource( 5 )
