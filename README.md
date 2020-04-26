@@ -32,7 +32,7 @@ Sound effects have been added to the game, some of which were original work and 
 The following sounds were retrieved online.  Their authors and the source they were retrieved from are also listed.
 * Explosion sound effect - [explode.wav](dev/assets/audio/explode.wav), created by Michel Baradari.  Retrieved from https://opengameart.org/content/2-high-quality-explosions
 * Player magic missile - [laser6.ogg](dev/assets/audio/laser6.ogg), created by Kenney.nl.  Retrieved from https://www.kenney.nl/assets/digital-audio
-* Player injured sound - [GDYN_Punching_Perc_PRO_SH - 9_edit.wav](dev/assets/audio/GDYN_Punching_Perc_PRO_SH - 9_edit.wav), created by Joshua Crispin.  Retrieved from http://99sounds.org/fight-sound-effects/
+* Player injured sound - [GDYN_Punching_Perc_PRO_SH-9_edit.wav](dev/assets/audio/GDYN_Punching_Perc_PRO_SH%20-%209_edit.wav), created by Joshua Crispin.  Retrieved from http://99sounds.org/fight-sound-effects/
 
 ### Updated UI
 Some slight modifications were made to the in game UI.  The font has been changed, and the health and boost bars now use textures rather than flat colors.  The “injured” effect also now has an animation.
