@@ -2,7 +2,7 @@
 # Documentation
 
 ## Summary
-This is an enhanced version of the "witch game" which I created for my previous project.  The plan for this project is explained in the [design document](design_doc.docx). 
+This is an enhanced version of the "witch game" which I created for my previous project.  The plan for this project is explained in the [design document](design_doc.pdf). 
 The list below explains some of the changes that have been made.
 
 ### Updated Camera System
@@ -28,6 +28,7 @@ Sound effects have been added to the game, some of which were original work and 
 * Health pickup (health_pickup.ogg)
 * Power-up pickup (powerup.ogg)
 * Enemy shoot sound effect (shoot.ogg)
+
 The following sounds were retrieved online.  Their authors and the source they were retrieved from are also listed.
 * Explosion sound effect (explode.wav), created by Michel Baradari.  Retrieved from https://opengameart.org/content/2-high-quality-explosions
 * Player magic missile (laser6.ogg), created by Kenney.nl.  Retrieved from https://www.kenney.nl/assets/digital-audio
