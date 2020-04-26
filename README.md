@@ -2,7 +2,7 @@
 # Documentation
 
 ## Summary
-This is an enhanced version of the "witch game" which I created for my previous project.  The plan for this project is explained in the [design document](design_doc.pdf). 
+This is an enhanced version of the ["witch game"](https://github.iu.edu/aliden/WitchGame) which I created for my previous project.  The plan for this project is explained in the [design document](design_doc.pdf). 
 The list below explains some of the changes that have been made.
 
 ### Updated Camera System
@@ -24,20 +24,21 @@ A new intro splash screen has been added so that the player isn’t immediately 
 
 ### Sound effects
 Sound effects have been added to the game, some of which were original work and some of which were retrieved online.  The following sounds were original:
-* Potion throw (throw.wav)
-* Health pickup (health_pickup.ogg)
-* Power-up pickup (powerup.ogg)
-* Enemy shoot sound effect (shoot.ogg)
+* Potion throw - [throw.wav](dev/assets/audio/throw.wav)
+* Health pickup - [health_pickup.ogg](dev/assets/audio/health_pickup.ogg)
+* Power-up pickup - [powerup.ogg](dev/assets/audio/powerup.ogg)
+* Enemy shoot sound effect - [shoot.ogg](dev/assets/audio/shoot.ogg)
 
 The following sounds were retrieved online.  Their authors and the source they were retrieved from are also listed.
-* Explosion sound effect (explode.wav), created by Michel Baradari.  Retrieved from https://opengameart.org/content/2-high-quality-explosions
-* Player magic missile (laser6.ogg), created by Kenney.nl.  Retrieved from https://www.kenney.nl/assets/digital-audio
-* Player injured sound (GDYN_Punching_Perc_PRO_SH - 9_edit.wav), created by Joshua Crispin.  Retrieved from http://99sounds.org/fight-sound-effects/
+* Explosion sound effect - [explode.wav](dev/assets/audio/explode.wav), created by Michel Baradari.  Retrieved from https://opengameart.org/content/2-high-quality-explosions
+* Player magic missile - [laser6.ogg](dev/assets/audio/laser6.ogg), created by Kenney.nl.  Retrieved from https://www.kenney.nl/assets/digital-audio
+* Player injured sound - [GDYN_Punching_Perc_PRO_SH - 9_edit.wav](dev/assets/audio/GDYN_Punching_Perc_PRO_SH - 9_edit.wav), created by Joshua Crispin.  Retrieved from http://99sounds.org/fight-sound-effects/
 
 ### Updated UI
 Some slight modifications were made to the in game UI.  The font has been changed, and the health and boost bars now use textures rather than flat colors.  The “injured” effect also now has an animation.
 
 ## How to play
+Run export/whimsical_witch.exe to start the game.
 
 ### Goal
 Try to reach the end without losing all of your health, and while getting as many points as possible.
@@ -69,4 +70,5 @@ The player takes damage if they hit terrain or an enemy.  The following enemies 
 Updating the camera system for this game was probably the most dramatic change in this project.  It required thinking about space from many different reference points.  The player needed to always face forward, but be allowed to tilt slightly when the mouse is moved.  The problem, though, is that allowing the mouse to tilt the player changes the player's forward direction.  To solve this, tilting was applied to a node that was a child of another spatial node.  The parent node would still be usable to find the correct forward direction.  Angle correction was done in a way similar to the previous project, using dot products.
 The 2-D shaders used in the title screen also helped me gain an understanding of the lower-level workings of a game.  I experimented with making the text "wavy" using the vertex shader, but found I wanted finer-detail control.  I created a fragment shader that changes the color for each pixel to the color of the pixel that's slightly to the right or left of the one that would have been used before.  It was a nice looking effect, and I could see it being useful for making objects distort as if they're underwater.  I've seen similar effects used for that purpose in games I've played previously, and it's interesting to see the low-level workings of this seemingly simple functionality.
 Additionally, I further refined my understanding of modeling and animation in the 3-D space.  All models, textures, and animations for this project are original, and I'm happy with what I've achieved with them.
+I also tried to use a better development workflow for this project than I used in the previous version.  I took more advanatage of git, and had a better organization to the file structure.
 Certainly, this isn't an exhaustive list of what I've learned from this project, but it's what comes to mind first.  It was enjoyable to make, and I feel like I've learned a lot.  Most of all, I hope it's fun.
